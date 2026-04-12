@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerCatalog
   _towers:
   - {fileID: 11400000, guid: 7af87421651616149a56f835556710f1, type: 2}
+  - {fileID: 11400000, guid: 2cc99cee2ee7fe349921f35390d70e47, type: 2}
+  - {fileID: 11400000, guid: 4a0f6192c7db24e40aae1e304e4c6793, type: 2}
+  - {fileID: 11400000, guid: d019c8ede249f7b43a250a80e1033b5b, type: 2}

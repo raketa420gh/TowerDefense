@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowerSlot : MonoBehaviour
 {
     public event Action<TowerSlot> Clicked;
+    public event Action<TowerSlot> TowerClicked;
 
     public bool IsOccupied => _tower != null;
     public Tower Tower => _tower;
@@ -29,7 +30,7 @@ public class TowerSlot : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (IsOccupied) return;
-        Clicked?.Invoke(this);
+        if (IsOccupied) TowerClicked?.Invoke(this);
+        else Clicked?.Invoke(this);
     }
 }

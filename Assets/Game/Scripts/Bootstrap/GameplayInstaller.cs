@@ -39,6 +39,8 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<HudView>().FromInstance(_levelContext.Hud).AsSingle();
         Container.Bind<LevelCompleteView>().FromInstance(_levelContext.CompleteView).AsSingle();
         Container.Bind<LevelFailedView>().FromInstance(_levelContext.FailedView).AsSingle();
+        Container.Bind<TowerInfoView>().FromInstance(_levelContext.TowerInfoView).AsSingle();
+        Container.Bind<TowerUpgradeService>().AsSingle();
 
         Container.BindInterfacesAndSelfTo<RewardService>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<LevelResultService>().AsSingle().NonLazy();
@@ -47,5 +49,6 @@ public class GameplayInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<HudPresenter>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<LevelCompletePresenter>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<LevelFailedPresenter>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<TowerInfoPresenter>().AsSingle().NonLazy();
     }
 }

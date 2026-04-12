@@ -35,6 +35,9 @@ public class LevelContext : MonoBehaviour
     [SerializeField]
     private LevelFailedView _failedView;
 
+    [SerializeField]
+    private TowerInfoView _towerInfoView;
+
     public LevelConfig Config => _config;
     public Path Path => _path;
     public PlayerBase PlayerBase => _playerBase;
@@ -46,4 +49,5 @@ public class LevelContext : MonoBehaviour
     public HudView Hud => _hud;
     public LevelCompleteView CompleteView => _completeView;
     public LevelFailedView FailedView => _failedView;
+    public TowerInfoView TowerInfoView => _towerInfoView;
 }

@@ -26,6 +26,7 @@ public class TowerFactory
         var tower = _container.InstantiatePrefabForComponent<Tower>(config.Prefab, slot.Position,
             Quaternion.identity, _root);
         tower.Init(config);
+        tower.AttachSlot(slot);
         slot.Attach(tower);
         _signalBus.Fire(new TowerBuiltSignal { Tower = tower });
         return true;

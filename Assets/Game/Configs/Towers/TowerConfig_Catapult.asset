@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 348ffdfc8b9ba2f48887a6fdb8892b72, type: 3}
-  m_Name: TowerConfig_Ballista
+  m_Name: TowerConfig_Catapult
   m_EditorClassIdentifier: Assembly-CSharp::TowerConfig
-  _id: ballista
-  _displayName: Ballista
+  _id: catapult
+  _displayName: Catapult
   _icon: {fileID: 0}
-  _prefab: {fileID: 6518657646954425999, guid: 8b441cfd533baf64eaa430000b28a4c2, type: 3}
-  _projectilePrefab: {fileID: 3326865053713745375, guid: e66a55abaf01bfd42a59acefb301928a, type: 3}
-  _cost: 50
-  _damage: 10
-  _range: 6
-  _fireRate: 1
-  _projectileSpeed: 20
+  _prefab: {fileID: 6518657646954425999, guid: d7dbf5f046c9e3b4a8f314a7a7492952, type: 3}
+  _projectilePrefab: {fileID: 3326865053713745375, guid: 66e57291c937d0746b8e685753bf8e21, type: 3}
+  _cost: 150
+  _damage: 40
+  _range: 7
+  _fireRate: 0.3
+  _projectileSpeed: 14
   _maxLevel: 3
   _upgradeMeshes: []
-  _splashRadius: 0
-  _slowMultiplier: 1
-  _slowDuration: 0
+  _splashRadius: 2.5
+  _slowMultiplier: 0.5
+  _slowDuration: 2

@@ -36,6 +36,7 @@ public class ProjectInstaller : ScriptableObjectInstaller<ProjectInstaller>
         Container.DeclareSignal<GoldChangedSignal>();
         Container.DeclareSignal<TowerBuiltSignal>();
         Container.DeclareSignal<TowerSoldSignal>();
+        Container.DeclareSignal<TowerUpgradedSignal>();
         Container.DeclareSignal<ProjectileHitSignal>();
     }
 }

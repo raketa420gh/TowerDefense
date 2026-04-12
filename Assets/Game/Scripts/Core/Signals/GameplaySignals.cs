@@ -15,6 +15,7 @@ public struct LevelCompletedSignal { public int LevelId; public int Stars; }
 public struct GoldChangedSignal { public int Current; }
 public struct TowerBuiltSignal { public Tower Tower; }
 public struct TowerSoldSignal { public Tower Tower; public int Refund; }
+public struct TowerUpgradedSignal { public Tower Tower; public int Level; }
 public struct ProjectileHitSignal { public Enemy Enemy; public int Damage; }
 
 public struct WaveEarlyStartRequestedSignal { }

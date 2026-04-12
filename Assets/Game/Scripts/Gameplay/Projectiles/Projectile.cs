@@ -3,14 +3,14 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Enemy _target;
-    private int _damage;
+    private ProjectileImpact _impact;
     private float _speed;
     private bool _active;
 
-    public void Launch(Vector3 origin, Enemy target, int damage, float speed)
+    public void Launch(Vector3 origin, Enemy target, ProjectileImpact impact, float speed)
     {
         _target = target;
-        _damage = damage;
+        _impact = impact;
         _speed = speed;
         transform.position = origin;
         _active = true;
@@ -35,9 +35,22 @@ public class Projectile : MonoBehaviour
 
         if ((next - targetPos).sqrMagnitude < 0.04f)
         {
-            _target.Health.TakeDamage(_damage);
+            ApplyImpact(targetPos);
             Release();
         }
+    }
+
+    private void ApplyImpact(Vector3 hitPos)
+    {
+        if (_impact.SplashRadius > 0f)
+        {
+            AreaDamage.Apply(hitPos, _impact);
+            return;
+        }
+
+        _target.Health.TakeDamage(_impact.Damage);
+        if (_impact.SlowDuration > 0f)
+            _target.Slow.Apply(_impact.SlowMultiplier, _impact.SlowDuration);
     }
 
     private void Release()

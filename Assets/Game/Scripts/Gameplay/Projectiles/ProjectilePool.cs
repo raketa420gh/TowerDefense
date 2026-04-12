@@ -12,10 +12,11 @@ public class ProjectilePool
         _root = root;
     }
 
-    public void Spawn(Projectile prefab, Vector3 origin, Enemy target, int damage, float speed)
+    public void Spawn(Projectile prefab, Vector3 origin, Enemy target,
+        ProjectileImpact impact, float speed)
     {
         var instance = _container.InstantiatePrefabForComponent<Projectile>(prefab, origin,
             Quaternion.identity, _root);
-        instance.Launch(origin, target, damage, speed);
+        instance.Launch(origin, target, impact, speed);
     }
 }

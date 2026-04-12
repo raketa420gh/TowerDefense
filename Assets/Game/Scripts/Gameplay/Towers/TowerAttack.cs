@@ -10,12 +10,14 @@ public class TowerAttack : MonoBehaviour
     private Transform _muzzle;
 
     private ProjectilePool _pool;
-    private TowerConfig _config;
+    private Tower _tower;
     private LayerMask _enemyMask;
     private readonly Collider[] _buffer = new Collider[MaxOverlap];
 
     private float _cooldown;
     private float _scanTimer;
+    private float _cachedRange;
+    private int _cachedDamage;
     private Enemy _currentTarget;
 
     [Inject]
@@ -25,16 +27,23 @@ public class TowerAttack : MonoBehaviour
         _enemyMask = LayerMask.GetMask("Enemies");
     }
 
-    public void Init(TowerConfig config)
+    public void Init(Tower tower)
     {
-        _config = config;
+        _tower = tower;
         _cooldown = 0f;
         _scanTimer = 0f;
+        RefreshStats();
+    }
+
+    public void RefreshStats()
+    {
+        _cachedDamage = _tower.EffectiveDamage;
+        _cachedRange = _tower.EffectiveRange;
     }
 
     private void Update()
     {
-        if (_config == null) return;
+        if (_tower == null) return;
 
         _scanTimer -= Time.deltaTime;
         if (_scanTimer <= 0f)
@@ -55,14 +64,25 @@ public class TowerAttack : MonoBehaviour
         _cooldown -= Time.deltaTime;
         if (_cooldown > 0f) return;
 
-        _cooldown = 1f / Mathf.Max(0.0001f, _config.FireRate);
+        _cooldown = 1f / Mathf.Max(0.0001f, _tower.Config.FireRate);
         var origin = _muzzle != null ? _muzzle.position : transform.position + Vector3.up;
-        _pool.Spawn(_config.ProjectilePrefab, origin, _currentTarget, _config.Damage, _config.ProjectileSpeed);
+
+        var impact = new ProjectileImpact
+        {
+            Damage = _cachedDamage,
+            SplashRadius = _tower.Config.SplashRadius,
+            SlowMultiplier = _tower.Config.SlowMultiplier,
+            SlowDuration = _tower.Config.SlowDuration,
+            EnemyMask = _enemyMask,
+        };
+
+        _pool.Spawn(_tower.Config.ProjectilePrefab, origin, _currentTarget,
+            impact, _tower.Config.ProjectileSpeed);
     }
 
     private Enemy FindNearest()
     {
-        var count = Physics.OverlapSphereNonAlloc(transform.position, _config.Range, _buffer, _enemyMask);
+        var count = Physics.OverlapSphereNonAlloc(transform.position, _cachedRange, _buffer, _enemyMask);
         Enemy best = null;
         float bestSqr = float.MaxValue;
         var pos = transform.position;
@@ -79,9 +99,9 @@ public class TowerAttack : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        if (_config == null) return;
+        if (_tower == null || _tower.Config == null) return;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _config.Range);
+        Gizmos.DrawWireSphere(transform.position, _tower.EffectiveRange);
     }
 #endif
 }
