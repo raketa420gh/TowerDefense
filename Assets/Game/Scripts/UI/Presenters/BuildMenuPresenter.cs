@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using Zenject;
 
 public class BuildMenuPresenter : IInitializable, IDisposable
@@ -53,7 +54,12 @@ public class BuildMenuPresenter : IInitializable, IDisposable
     {
         _activeSlot = slot;
         _view.Populate(_catalog.Towers, _wallet.Current);
-        _view.Show();
+
+        var cam = _levelContext.LevelCamera;
+        var screenPos = cam != null
+            ? (UnityEngine.Vector2)cam.WorldToScreenPoint(slot.transform.position)
+            : new UnityEngine.Vector2(UnityEngine.Screen.width * 0.5f, UnityEngine.Screen.height * 0.5f);
+        _view.ShowAt(screenPos);
     }
 
     private void OnTowerPicked(TowerConfig config)

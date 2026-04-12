@@ -9,6 +9,9 @@ public class BuildMenuView : DisplayableView
     public event Action Dismissed;
 
     [SerializeField]
+    private RectTransform _panel;
+
+    [SerializeField]
     private RectTransform _root;
 
     [SerializeField]
@@ -38,6 +41,14 @@ public class BuildMenuView : DisplayableView
             btn.Clicked += OnClicked;
             _spawned.Add(btn);
         }
+    }
+
+    public void ShowAt(Vector2 screenPosition)
+    {
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            (RectTransform)transform, screenPosition, null, out Vector2 local);
+        _panel.anchoredPosition = local;
+        Show();
     }
 
     public void UpdateAffordability(int currentGold)
