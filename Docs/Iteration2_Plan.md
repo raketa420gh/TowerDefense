@@ -8,22 +8,22 @@
 
 ## Прогресс
 
-- [ ] 1. Сигналы геймплея
-- [ ] 2. `PathData` + `Path` (waypoints в сцене)
-- [ ] 3. `EnemyConfig` (SO)
-- [ ] 4. `Enemy` + `EnemyMovement` + `EnemyHealth`
-- [ ] 5. `EnemyFactory` (Zenject `MemoryPool`)
-- [ ] 6. `PlayerBase` + `BaseHealth`
-- [ ] 7. `WaveConfig` (SO) + `WaveSpawner` (`ITickable`)
-- [ ] 8. `LevelConfig` (SO) + расширение `LevelDefinition`
-- [ ] 9. `LevelContext` — scene-side агрегатор (Path, Spawner, Base, spawn point)
-- [ ] 10. `GameplayInstaller` — биндинги
-- [ ] 11. `GameplayState` — запускает спавн, слушает `BaseDestroyedSignal`
-- [ ] 12. `LevelFailedState` (минимальный, авто-возврат в меню)
-- [ ] 13. Регистрация новых state'ов в `GameLoopStateMachine`
-- [ ] 14. Scene/prefab setup: `Gameplay.unity`, префаб уровня 1 из Kenney-тайлов, префаб врага `ufo-a`
-- [ ] 15. Ассет `LevelConfig_01`, `EnemyConfig_UfoA`, `WaveConfig_Level1_W1`
-- [ ] 16. Ручной тест: враг доходит → база умирает → MainMenu
+- [x] 1. Сигналы геймплея
+- [x] 2. `PathData` + `Path` (waypoints в сцене)
+- [x] 3. `EnemyConfig` (SO)
+- [x] 4. `Enemy` + `EnemyMovement` + `EnemyHealth`
+- [x] 5. `EnemyFactory` (упрощённая, без Zenject MemoryPool — `InstantiatePrefabForComponent` + `Object.Destroy`)
+- [x] 6. `PlayerBase` + `BaseHealth`
+- [x] 7. `WaveConfig` (SO) + `WaveSpawner` (IInitializable/IDisposable, не ITickable)
+- [x] 8. `LevelConfig` (SO) + расширение `LevelDefinition`
+- [x] 9. `LevelContext` — scene-side агрегатор (Path, Spawner, Base, spawn point)
+- [x] 10. `GameplayInstaller` — биндинги
+- [x] 11. `GameplayState` — запускает спавн, слушает `BaseDestroyedSignal`
+- [x] 12. `LevelFailedState` (минимальный, авто-возврат в меню)
+- [x] 13. Регистрация новых state'ов в `GameLoopStateMachine`
+- [x] 14. Scene/prefab setup: `Gameplay.unity`, префаб уровня 1 из Kenney-тайлов, префаб врага `ufo-a`
+- [x] 15. Ассет `LevelConfig_01`, `EnemyConfig_UfoA`, `WaveConfig_Level1_W1`
+- [x] 16. Ручной тест: враг доходит → база умирает → MainMenu
 
 ---
 
@@ -816,6 +816,17 @@ RegisterState(_container.Instantiate<LevelCompleteState>(new object[] { this }),
 5. После 3 врагов база умирает (HP 20, dmg 1 × 3 = 3 → нужно уменьшить HP базы до 3 для быстрого теста).
 6. `BaseDestroyedSignal` → `LevelFailedState` → авто-возврат в `Menu`.
 7. В консоли — последовательные логи состояний, никаких NRE.
+
+---
+
+## Отклонения от плана
+
+- **EnemyFactory**: пулинг отложен — используется `_container.InstantiatePrefabForComponent` + `Object.Destroy`. `IMemoryPool` / `MonoPoolableMemoryPool` не применялся.
+- **WaveSpawner**: в итерации 2 реализован как заглушка (одна волна). Финальная версия с `IInitializable/IDisposable`, early-start и alive-counter появилась в итерации 4.
+- **WaveSpawner.Run**: подпись `Run(waves, paths)` — принимает `IReadOnlyList<Path>` (добавлено в итерации 6). В итерации 2 был `Run(waves, path)`.
+- **ICoroutineRunner.Stop**: метод называется `Stop(Coroutine)`, не `StopRoutine(Coroutine)`.
+- **LevelConfig**: в финальной версии нет поля `SceneName` — вместо него `LevelContext LevelPrefab`. Сцены загружаются через `LevelDefinition.SceneName` из каталога.
+- **LevelCompleteState**: в итерации 2 был `LevelCompleteState`-заглушка. Финальный вариант — в итерации 4.
 
 ---
 

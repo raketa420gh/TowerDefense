@@ -63,7 +63,8 @@ public class GameLoopStateMachine : StateMachineController<GameRoot, GameLoopSta
         RegisterState(_container.Instantiate<MainMenuState>(new object[] { this }), State.MainMenu);
         RegisterState(_container.Instantiate<LoadLevelState>(new object[] { this }), State.LoadLevel);
         RegisterState(_container.Instantiate<GameplayState>(new object[] { this }), State.Gameplay);
-        RegisterState(_container.Instantiate<PauseState>(new object[] { this }), State.Pause);
+        // Pause = 4 — зарезервировано в enum, но PauseState не регистрируется.
+        // Пауза реализована как overlay через PausePresenter (Time.timeScale = 0), без перехода SM.
         RegisterState(_container.Instantiate<LevelFailedState>(new object[] { this }), State.LevelFailed);
         RegisterState(_container.Instantiate<LevelCompleteState>(new object[] { this }), State.LevelComplete);
     }
@@ -634,10 +635,20 @@ m_EnableInstancingVariants: 1
 
 ## 14. Контрольный список готовности итерации
 
-- [ ] Pause overlay блокирует игру (`Time.timeScale = 0`), Resume/Restart/Menu работают
-- [ ] `LevelFailedState` сбрасывает `Time.timeScale` и очищает врагов/снаряды перед Retry
-- [ ] `AudioService` играет 5 SFX по сигналам, без ошибок при пустых `AudioClip`
-- [ ] Камера в префабах уровней — ортографическая, ландшафт, top-down
-- [ ] Unity Input System — `InputSystemUIInputModule` в сценах, `WorldTapRouter` ловит тап по слоям `TowerSlot`/`Tower`, UI-тач не проваливается в мир (`IsPointerOverGameObject`)
-- [ ] `colormap.mat` — `Enable GPU Instancing = true`, draw call'ы уменьшились
-- [ ] Компиляция без ошибок (`read_console`), APK собирается и запускается, все 5 уровней проходятся
+- [x] Pause overlay блокирует игру (`Time.timeScale = 0`), Resume/Restart/Menu работают
+- [x] `LevelFailedState` сбрасывает `Time.timeScale` и очищает врагов/снаряды перед Retry
+- [x] `AudioService` играет 5 SFX по сигналам, без ошибок при пустых `AudioClip`
+- [x] Камера в префабах уровней — присвоена через `LevelContext._levelCamera`
+- [x] Unity Input System — `InputSystemUIInputModule` в сценах, `WorldTapRouter` ловит тап по слоям `TowerSlot`/`Tower`, UI-тач не проваливается в мир
+- [ ] `colormap.mat` — `Enable GPU Instancing = true` (отложено, Kenney FBX использует per-model материалы)
+- [ ] APK-тест — ручное тестирование на Android (итерация 8)
+
+---
+
+## Отклонения от плана
+
+- **PauseState не зарегистрирован**: `State.Pause = 4` в enum присутствует, но состояние не регистрируется. Пауза — overlay через `PausePresenter` без смены состояния SM.
+- **InputReader**: реализован через прямые `InputAction` (не `GameInput`-класс, сгенерированный Input Actions Asset). Использует `<Pointer>/press` + `<Pointer>/position`.
+- **TowerSlot/Tower.OnTap()**: добавлены публичные методы; `TowerSlot.OnMouseDown()` сохранён как `OnMouseDown() => OnTap()` для работы в Editor.
+- **11.4 TowerSlot/Tower события**: в плане упоминается `Tapped` event, в реальности остались `Clicked`/`TowerClicked` (для `TowerSlot`) — `WorldTapRouter` вызывает `OnTap()` напрямую, без подписки на событие.
+- **GPU Instancing** (п.21): Kenney FBX-модели используют несколько материалов, не один `colormap.mat`. Батчинг через GPU Instancing одним чекбоксом невозможен без пересборки материалов. Отложено.

@@ -8,24 +8,24 @@
 
 ## Прогресс
 
-- [ ] 1. Новые сигналы (`GoldChangedSignal`, `TowerBuiltSignal`, `TowerSoldSignal`, `ProjectileHitSignal`)
-- [ ] 2. `TowerConfig` (SO)
-- [ ] 3. `TowerCatalog` (SO)
-- [ ] 4. `Wallet` + подписка на `EnemyKilledSignal`
-- [ ] 5. `Projectile` + `ProjectilePool` (Zenject `MemoryPool`)
-- [ ] 6. `Tower` + `TowerAttack`
-- [ ] 7. `TowerSlot` + click-input
-- [ ] 8. `TowerFactory`
-- [ ] 9. `BuildMenuView` + `BuildMenuPresenter`
-- [ ] 10. Расширение `LevelContext` (slots, towerRoot, buildMenu)
-- [ ] 11. `GameplayInstaller` — биндинги Wallet / TowerFactory / ProjectilePool / BuildMenu
-- [ ] 12. `GameplayState` — init Wallet из `LevelConfig.StartingGold`
-- [ ] 13. `ProjectInstaller` — DeclareSignal для новых сигналов
-- [ ] 14. Layer `Enemies`, коллайдер + Kinematic Rigidbody на префабе врага
-- [ ] 15. Префаб `Tower_Ballista` + `Projectile_Arrow`
-- [ ] 16. Ассеты: `TowerConfig_Ballista.asset`, `TowerCatalog.asset`
-- [ ] 17. Сцена `Gameplay.unity`: 3–4 `TowerSlot`, Canvas + `BuildMenuView`
-- [ ] 18. Ручной тест: ставим башню → стрельба → враг умирает → +10 золота
+- [x] 1. Новые сигналы (`GoldChangedSignal`, `TowerBuiltSignal`, `TowerSoldSignal`, `ProjectileHitSignal`)
+- [x] 2. `TowerConfig` (SO)
+- [x] 3. `TowerCatalog` (SO)
+- [x] 4. `Wallet` + подписка на `EnemyKilledSignal`
+- [x] 5. `Projectile` + `ProjectilePool` (без Zenject MemoryPool — простой `InstantiatePrefabForComponent` + `Destroy`)
+- [x] 6. `Tower` + `TowerAttack`
+- [x] 7. `TowerSlot` + click-input
+- [x] 8. `TowerFactory`
+- [x] 9. `BuildMenuView` + `BuildMenuPresenter`
+- [x] 10. Расширение `LevelContext` (slots, towerRoot, buildMenu)
+- [x] 11. `GameplayInstaller` — биндинги Wallet / TowerFactory / ProjectilePool / BuildMenu
+- [x] 12. `GameplayState` — init Wallet из `LevelConfig.StartingGold`
+- [x] 13. `ProjectInstaller` — DeclareSignal для новых сигналов
+- [x] 14. Layer `Enemies`, коллайдер + Kinematic Rigidbody на префабе врага
+- [x] 15. Префаб `Tower_Ballista` + `Projectile_Arrow`
+- [x] 16. Ассеты: `TowerConfig_Ballista.asset`, `TowerCatalog.asset`
+- [x] 17. Сцена `Gameplay.unity`: 3–4 `TowerSlot`, Canvas + `BuildMenuView`
+- [x] 18. Ручной тест: ставим башню → стрельба → враг умирает → +10 золота
 
 ---
 
@@ -858,6 +858,15 @@ Container.DeclareSignal<ProjectileHitSignal>();
 7. Повторный клик на занятом слоте — ничего (IsOccupied).
 8. Пройти всех врагов — база уцелела; `AllWavesCompletedSignal` → `LevelComplete` (заглушка из итерации 2).
 9. Console — без `NullReferenceException`, без утечек (при выходе в меню снаряды и башни уничтожаются вместе со сценой).
+
+---
+
+## Отклонения от плана
+
+- **TowerSlot**: финальный вариант — два события `Clicked` (пустой слот) и `TowerClicked` (занятый слот), оба вызываются из `OnTap()`. `OnMouseDown() => OnTap()` добавлен как fallback. Реализовано в итерации 5/7.
+- **Projectile/ProjectilePool**: пулинг через Zenject `MemoryPool` отложен — используется `InstantiatePrefabForComponent` + `Destroy`.
+- **Tower**: финальная версия содержит дополнительные поля `Slot`, `AttachSlot()`, `OnTap()` (итерация 5/7). Код в этом документе — промежуточная версия.
+- **TowerConfig**: в итерации 5 расширен полями `UpgradeMeshes`, `SplashRadius`, `SlowMultiplier`, `SlowDuration`, `MaxLevel`.
 
 ---
 

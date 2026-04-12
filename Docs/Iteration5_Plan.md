@@ -8,27 +8,27 @@
 
 ## Прогресс
 
-- [ ] 1. `TowerConfig` — поля `UpgradeMeshes[]`, `SplashRadius`, `SlowMultiplier`, `SlowDuration`, `MaxLevel`, расчёты `GetDamage/GetRange/GetUpgradeCost(level)`
-- [ ] 2. `Tower` — рантайм-уровень, `TotalInvested`, `SellRefund`, методы `Upgrade()` / `GetSellRefund()`
-- [ ] 3. `TowerMeshSwitcher` — компонент, меняет mesh при апгрейде
-- [ ] 4. `TowerAttack` — использует effective stats (`_tower.EffectiveDamage/EffectiveRange`), передаёт `ProjectileImpact` в пул
-- [ ] 5. `ProjectileImpact` (struct) + расширение `Projectile.Launch` + `ProjectilePool.Spawn`
-- [ ] 6. `AreaDamage` (static) — урон и slow по радиусу
-- [ ] 7. `Projectile` — на попадании применяет splash и slow
-- [ ] 8. `SlowEffect` (компонент на враге) — таймер, мультипликатор, стакается по «сильнейшему»
-- [ ] 9. `EnemyMovement` — множитель скорости, метод `SetSpeedMultiplier(float)`
-- [ ] 10. `Enemy.Awake` — получает `SlowEffect`, прокидывает в `EnemyMovement`
-- [ ] 11. `TowerSlot` — клик по занятому слоту → событие `ClickedOccupied` (или тот же `Clicked` с проверкой занятости в презентере)
-- [ ] 12. `TowerInfoView : DisplayableView` — характеристики, `Upgrade` / `Sell` / `Close`
-- [ ] 13. `TowerInfoPresenter : IInitializable, IDisposable` — открытие по клику, заполнение, операции
-- [ ] 14. `TowerUpgradeService` — единая точка: `TryUpgrade(Tower)`, `Sell(Tower)`, списание/возврат золота, сигналы
-- [ ] 15. Новый сигнал `TowerUpgradedSignal { Tower, Level }`, `DeclareSignal` в `ProjectInstaller`
-- [ ] 16. `LevelContext` — поле `_towerInfoView`, геттер
-- [ ] 17. `GameplayInstaller` — биндинги `TowerInfoView`, `TowerInfoPresenter`, `TowerUpgradeService`; обновление `BuildMenuPresenter` (игнорировать клик по занятому слоту)
-- [ ] 18. Ассеты: `TowerConfig_Cannon/Catapult/Turret.asset`, префабы башен, Projectile-префабы `CannonBall/Boulder/Bullet`, иконки
-- [ ] 19. Prefab `TowerInfoView.prefab` в сцене `Gameplay.unity`
-- [ ] 20. `TowerCatalog.asset` — добавить 4 башни
-- [ ] 21. Ручной тест — строю каждую башню, апгрейжу, продаю, проверяю splash/slow
+- [x] 1. `TowerConfig` — поля `UpgradeMeshes[]`, `SplashRadius`, `SlowMultiplier`, `SlowDuration`, `MaxLevel`, расчёты `GetDamage/GetRange/GetUpgradeCost(level)`
+- [x] 2. `Tower` — рантайм-уровень, `TotalInvested`, `SellRefund`, `ApplyUpgrade()` (вместо `Upgrade()`)
+- [x] 3. `TowerMeshSwitcher` — компонент, меняет mesh при апгрейде
+- [x] 4. `TowerAttack` — использует effective stats (`_tower.EffectiveDamage/EffectiveRange`), передаёт `ProjectileImpact` в пул
+- [x] 5. `ProjectileImpact` (struct) + расширение `Projectile.Launch` + `ProjectilePool.Spawn`
+- [x] 6. `AreaDamage` (static) — урон и slow по радиусу
+- [x] 7. `Projectile` — на попадании применяет splash и slow
+- [x] 8. `SlowEffect` (компонент на враге) — таймер, мультипликатор, стакается по «сильнейшему»
+- [x] 9. `EnemyMovement` — множитель скорости, метод `SetSpeedMultiplier(float)`
+- [x] 10. `Enemy.Awake` — получает `SlowEffect`, прокидывает в `EnemyMovement`
+- [x] 11. `TowerSlot` — два события: `Clicked` (пустой) и `TowerClicked` (занятый), вызываются из `OnTap()`
+- [x] 12. `TowerInfoView : DisplayableView` — характеристики, `Upgrade` / `Sell` / `Close`
+- [x] 13. `TowerInfoPresenter : IInitializable, IDisposable` — открытие по клику, заполнение, операции
+- [x] 14. `TowerUpgradeService` — единая точка: `TryUpgrade(Tower)`, `Sell(Tower)`, списание/возврат золота, сигналы
+- [x] 15. Новый сигнал `TowerUpgradedSignal { Tower, Level }`, `DeclareSignal` в `ProjectInstaller`
+- [x] 16. `LevelContext` — поле `_towerInfoView`, геттер
+- [x] 17. `GameplayInstaller` — биндинги `TowerInfoView`, `TowerInfoPresenter`, `TowerUpgradeService`
+- [x] 18. Ассеты: `TowerConfig_Cannon/Catapult/Turret.asset`, префабы башен, Projectile-префабы `CannonBall/Boulder/Bullet`, иконки
+- [x] 19. Prefab `TowerInfoView.prefab` в сцене `Gameplay.unity`
+- [x] 20. `TowerCatalog.asset` — добавить 4 башни
+- [x] 21. Ручной тест — строю каждую башню, апгрейжу, продаю, проверяю splash/slow
 
 ---
 
@@ -935,6 +935,15 @@ Container.BindInterfacesAndSelfTo<TowerInfoPresenter>().AsSingle().NonLazy();
 9. Пройти уровень полностью → `LevelCompleteView` корректен. Повторный вход — башен нет, золото на старте.
 10. Console — 0 `NullReferenceException`, подписки снимаются при переходе Menu ↔ Gameplay несколько раз.
 11. Slow стакается по «сильнейшему»: два попадания Catapult подряд не делают врага быстрее, более долгий таймер сохраняется.
+
+---
+
+## Отклонения от плана
+
+- **Tower.ApplyUpgrade()**: метод называется `ApplyUpgrade()`, не `Upgrade()`. Дополнительно добавлены `TowerSlot Slot`, `AttachSlot(TowerSlot)`, `OnTap()`.
+- **TowerSlot.OnMouseDown**: в итерации 3 был `OnMouseDown` напрямую. В итерации 5 добавлен `OnTap()` публичный метод, `OnMouseDown() => OnTap()` как fallback. В итерации 7 `WorldTapRouter` вызывает `OnTap()` напрямую.
+- **TowerUpgradeService.Sell**: финальная версия использует `tower.Slot.Detach()` через `Tower.Slot`, а не поиск через `FindObjectsByType`.
+- **TowerFactory.TryBuild**: добавлен `tower.AttachSlot(slot)` после `tower.Init(config)`.
 
 ---
 

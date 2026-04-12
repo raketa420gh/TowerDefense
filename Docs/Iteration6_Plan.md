@@ -8,27 +8,23 @@
 
 ## Прогресс
 
-- [ ] 1. `WaveConfig.SubWave` — поле `PathIndex` (default 0) для split-уровней
-- [ ] 2. `LevelConfig` — замена `_path` на массив путей **не требуется** (он в `LevelContext`), но добавить `SceneName`/проверку; фактические пути лежат в `LevelContext.Paths`
-- [ ] 3. `LevelContext` — `Path[] _paths` вместо одиночного `Path`, геттер `Paths`, обратная совместимость удаляется
-- [ ] 4. `Path.cs` — без изменений
-- [ ] 5. `WaveSpawner.Run(IReadOnlyList<WaveConfig>, IReadOnlyList<Path>)` — выбор пути по `sub.PathIndex`, безопасный clamp
-- [ ] 6. `GameplayState.OnStateActivated` — передаёт `levelContext.Paths` в `WaveSpawner.Run`
-- [ ] 7. `EnemyConfig` — поле `_visualScale` (default 1) для боссa
-- [ ] 8. `EnemyFactory.Spawn` — применяет `config.VisualScale` к `enemy.transform.localScale`
-- [ ] 9. Ассеты `EnemyConfig_UfoB/UfoC/UfoD/Boss.asset` по таблице врагов (раздел 5 GDD)
-- [ ] 10. Ассеты `WaveConfig_L{1..5}_W{n}.asset` — составы волн из раздела 3 GDD
-- [ ] 11. Ассеты `LevelConfig_L1..L5.asset` — startingGold, baseHealth, список `_waves`
-- [ ] 12. Обновить `LevelCatalog.asset` — 5 записей (`LevelDefinition` по 5 конфигам)
-- [ ] 13. Prefab `Level_1.prefab` (прямой) — уже есть из предыдущих итераций, проверить `LevelContext.Paths[0]`
-- [ ] 14. Prefab `Level_2.prefab` — путь с поворотами (tile + tile-corner-*)
-- [ ] 15. Prefab `Level_3.prefab` — split: **2 `Path`**, оба спавн-тайла, общий финиш у базы
-- [ ] 16. Prefab `Level_4.prefab` — узкий длинный (ущелье)
-- [ ] 17. Prefab `Level_5.prefab` — сложный путь + развилка, больше слотов
-- [ ] 18. `LevelDefinition.SceneName` — все 5 уровней используют общую сцену `Gameplay.unity`; разный `LevelConfig` → разный prefab-уровень (spawn в `GameplayState` по `LevelConfig.LevelPrefab`)
-- [ ] 19. `LevelConfig._levelPrefab` (GameObject) — префаб с `LevelContext`, инстанцируется при загрузке уровня
-- [ ] 20. `GameplayState` — инстанцирует `LevelConfig.LevelPrefab`, ищет `LevelContext` в инстансе
-- [ ] 21. Ручной тест — пройти все 5 уровней подряд, проверить сложность, split на L3, boss на L5, звёзды сохраняются через `PlayerProgress`
+- [x] 1. `WaveConfig.SubWave` — поле `PathIndex` (default 0) для split-уровней
+- [x] 2. `LevelConfig` — пути в `LevelContext.Paths`; `LevelConfig` содержит `LevelContext _levelPrefab` (вместо `SceneName`)
+- [x] 3. `LevelContext` — `Path[] _paths` + `OnValidate` для обратной совместимости с `_path`
+- [x] 4. `Path.cs` — без изменений
+- [x] 5. `WaveSpawner.Run(IReadOnlyList<WaveConfig>, IReadOnlyList<Path>)` — выбор пути по `sub.PathIndex`, безопасный clamp
+- [x] 6. `GameplayState.OnStateActivated` — передаёт `levelContext.Paths` в `WaveSpawner.Run`
+- [x] 7. `EnemyConfig` — поле `_visualScale` (default 1) для босса
+- [x] 8. `EnemyFactory.Spawn` — применяет `config.VisualScale` к `enemy.transform.localScale`
+- [x] 9. Ассеты `EnemyConfig_UfoB/UfoC/UfoD/Boss.asset` по таблице врагов (раздел 5 GDD)
+- [x] 10. Ассеты `WaveConfig_L{1..5}_W{n}.asset` — составы волн из раздела 3 GDD
+- [x] 11. Ассеты `LevelConfig_L1..L5.asset` — startingGold, baseHealth, список `_waves`
+- [x] 12. Обновить `LevelCatalog.asset` — 5 записей (`LevelDefinition` по 5 конфигам)
+- [x] 13–17. Уровни 1–5 реализованы как **отдельные сцены**: `Gameplay.unity`, `Gameplay_L2.unity`, `Gameplay_L3.unity`, `Gameplay_L4.unity`, `Gameplay_L5.unity` (см. отклонения)
+- [x] 18. `LevelDefinition.SceneName` — у каждого уровня своя сцена (`"Gameplay"`, `"Gameplay_L2"`, ...)
+- [x] 19. `LevelConfig._levelPrefab` — поле `LevelContext LevelPrefab` (тип `LevelContext`, не `GameObject`)
+- [~] 20. `GameplayState` **не инстанцирует** `LevelConfig.LevelPrefab` — `LevelContext` уже в сцене; `FindFirstObjectByType<LevelContext>()` (см. отклонения)
+- [x] 21. Ручной тест — пройти все 5 уровней подряд, проверить сложность, split на L3, boss на L5, звёзды сохраняются через `PlayerProgress`
 
 ---
 
@@ -491,11 +487,29 @@ PathIndex чередуется: чётные подволны — path 0, неч
 
 ## 13. Контрольный список готовности итерации
 
-- [ ] `WaveConfig.SubWave.PathIndex` собирается и сериализуется
-- [ ] `LevelContext.Paths` не null, `Length ≥ 1` для всех префабов
-- [ ] `WaveSpawner.Run` принимает `IReadOnlyList<Path>` — старые вызовы с одним `Path` удалены
-- [ ] `GameplayState` корректно уничтожает инстанс уровня в `OnStateDisabled` (проверить `LevelComplete → MainMenu → L2`)
-- [ ] Boss спавнится с `transform.localScale = 2.5`
-- [ ] Все 5 `LevelConfig` заведены в `LevelCatalog`
-- [ ] `LevelSelectView` показывает 5 кнопок и блокировки по `PlayerProgress.UnlockedLevel`
-- [ ] Компиляция без ошибок (`read_console`), прохождение всех 5 уровней подряд
+- [x] `WaveConfig.SubWave.PathIndex` собирается и сериализуется
+- [x] `LevelContext.Paths` не null, `Length ≥ 1` для всех сцен
+- [x] `WaveSpawner.Run` принимает `IReadOnlyList<Path>` — вызов с одним `Path` удалён
+- [~] `GameplayState` не инстанцирует уровень из префаба — уровень уже в сцене (см. отклонения)
+- [x] Boss спавнится с `transform.localScale = 2.5`
+- [x] Все 5 `LevelConfig` заведены в `LevelCatalog`
+- [x] `LevelSelectView` показывает 5 кнопок и блокировки по `PlayerProgress.UnlockedLevel`
+- [x] Компиляция без ошибок (`read_console`), прохождение всех 5 уровней подряд
+
+---
+
+## Отклонения от плана
+
+### Подход к уровням: отдельные сцены vs одна сцена + prefab
+
+Итерация 6 планировала одну сцену `Gameplay.unity` с инстанцированием `LevelConfig.LevelPrefab` в `GameplayState`. **Реализовано иначе:**
+
+- **5 отдельных сцен**: `Gameplay.unity` (L1), `Gameplay_L2.unity`, `Gameplay_L3.unity`, `Gameplay_L4.unity`, `Gameplay_L5.unity`.
+- `LevelDefinition.SceneName` содержит имя конкретной сцены (`"Gameplay"`, `"Gameplay_L2"`, ...).
+- `LoadLevelState` грузит нужную сцену, в ней `LevelContext` уже настроен в инспекторе.
+- `GameplayState` по-прежнему использует `FindFirstObjectByType<LevelContext>()`.
+- `LevelConfig._levelPrefab` (тип `LevelContext`) существует как поле, но `GameplayState` его **не инстанцирует** — поле зарезервировано для потенциального рефакторинга.
+
+**Почему:** подход с отдельными сценами проще в редакторе — каждый уровень правится независимо, без риска сломать чужие `LevelContext`. Разница в рантайм-поведении нулевая.
+
+**Следствие для итерации 8:** Android Build Settings должен включать все 7 сцен (`SampleScene`, `Menu`, `Gameplay`, `Gameplay_L2..L5`).

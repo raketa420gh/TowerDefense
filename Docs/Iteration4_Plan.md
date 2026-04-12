@@ -8,25 +8,25 @@
 
 ## Прогресс
 
-- [ ] 1. Новые сигналы и поля: `WaveRewardGrantedSignal`, `WaveBreakStartedSignal`, `LevelCompletedSignal(int stars)`, расширение `WaveStartedSignal` (Index, Total)
-- [ ] 2. `WaveConfig` — поле `Reward`
-- [ ] 3. `WaveSpawner` — награда за волну, перерыв, early-start, отсчёт
-- [ ] 4. `RewardService` (IInitializable) — подписка на `WaveCompletedSignal` → `Wallet.Add`
-- [ ] 5. `StarCalculator` (stateless) — расчёт звёзд по `HP/maxHP`
-- [ ] 6. `LevelResultService` — копит финальный HP базы, сохраняет прогресс
-- [ ] 7. `HudView : DisplayableView` (золото, HP, волна, кнопка Early-Start)
-- [ ] 8. `HudPresenter : IInitializable, IDisposable`
-- [ ] 9. `LevelCompleteView : DisplayableView` + `LevelCompletePresenter`
-- [ ] 10. `LevelFailedView : DisplayableView` + `LevelFailedPresenter`
-- [ ] 11. Расширение `LevelContext` — ссылки на `HudView`, `LevelCompleteView`, `LevelFailedView`
-- [ ] 12. `GameplayInstaller` — биндинги новых сервисов и views
-- [ ] 13. `ProjectInstaller` — `DeclareSignal` для новых сигналов
-- [ ] 14. `LevelCompleteState` — ждёт клика на `LevelCompleteView`, не автотаймер
-- [ ] 15. `LevelFailedState` — показ view, Retry/Menu
-- [ ] 16. `LevelSelectView` — обновление звёзд после возврата из гемплея
-- [ ] 17. Сцена `Gameplay.unity` — добавить Canvas Hud/Complete/Failed, наполнение префабов
-- [ ] 18. `WaveConfig_01.asset` — выставить `Reward`
-- [ ] 19. Ручной тест — полное прохождение уровня 1, звёзды, возврат, разблокировка
+- [x] 1. Новые сигналы: `WaveBreakStartedSignal`, `LevelCompletedSignal(int stars)`, расширение `WaveStartedSignal` (Index, Total)
+- [x] 2. `WaveConfig` — поле `Reward`
+- [x] 3. `WaveSpawner` — награда за волну, перерыв, early-start, отсчёт живых врагов
+- [x] 4. `RewardService` (IInitializable) — подписка на `WaveCompletedSignal` → `Wallet.Add`
+- [x] 5. `StarCalculator` (stateless) — расчёт звёзд по `HP/maxHP`
+- [x] 6. `LevelResultService` — копит финальный HP базы, сохраняет прогресс
+- [x] 7. `HudView : DisplayableView` (золото, HP, волна, кнопка Early-Start)
+- [x] 8. `HudPresenter : IInitializable, IDisposable, ITickable`
+- [x] 9. `LevelCompleteView : DisplayableView` + `LevelCompletePresenter`
+- [x] 10. `LevelFailedView : DisplayableView` + `LevelFailedPresenter`
+- [x] 11. Расширение `LevelContext` — ссылки на `HudView`, `LevelCompleteView`, `LevelFailedView`
+- [x] 12. `GameplayInstaller` — биндинги новых сервисов и views
+- [x] 13. `ProjectInstaller` — `DeclareSignal` для новых сигналов
+- [x] 14. `LevelCompleteState` — ждёт клика на `LevelCompleteView`, не автотаймер
+- [x] 15. `LevelFailedState` — показ view, Retry/Menu
+- [x] 16. `LevelSelectView` — обновление звёзд после возврата из гемплея
+- [x] 17. Сцена `Gameplay.unity` — добавить Canvas Hud/Complete/Failed, наполнение префабов
+- [x] 18. `WaveConfig_01.asset` — выставить `Reward`
+- [x] 19. Ручной тест — полное прохождение уровня 1, звёзды, возврат, разблокировка
 
 ---
 
@@ -849,6 +849,16 @@ public class LevelFailedState : GameLoopState
 9. Рестарт, пропустить одного врага (HP 19/20) → 2⭐. Пропустить ≥11 → 1⭐. Проверить `StarCalculator` формулой.
 10. Рестарт, довести базу до 0 → `LevelFailedSignal` → `LevelFailedState` → `LevelFailedView`. Retry → заново тот же уровень. Menu → меню, прогресс не изменён.
 11. Console — без `NullReferenceException`, без утечек подписок после перехода Menu ↔ Gameplay несколько раз.
+
+---
+
+## Отклонения от плана
+
+- **WaveRewardGrantedSignal**: не добавлялся — награда за волну передаётся полем `WaveCompletedSignal.Reward`.
+- **ICoroutineRunner**: метод `Stop(Coroutine)`, не `StopRoutine(Coroutine)`.
+- **LevelCompleteState/LevelFailedState**: `Time.timeScale = 1f` добавлен первой строкой в `OnStateActivated` (сделано в итерации 7).
+- **LevelFailedState**: в финальной версии также вызывает `spawner.Stop()` и уничтожает живых врагов/снаряды (сделано в итерации 7).
+- **GameplayState**: в финальной версии принимает `SceneLoader` и управляет `PausePresenter.Restart/BackToMenu` (итерация 7).
 
 ---
 
