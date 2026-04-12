@@ -24,10 +24,7 @@ public class LevelSelectView : DisplayableView
     public void Refresh(PlayerProgress progress)
     {
         foreach (var btn in _buttons)
-        {
-            bool unlocked = btn.LevelId <= progress.UnlockedLevel;
-            btn.Bind(unlocked, progress.GetStars(btn.LevelId));
-        }
+            btn.Bind(true, progress.GetStars(btn.LevelId));
     }
 
     private void OnButtonClicked(int id) => LevelSelected?.Invoke(id);
