@@ -1,6 +1,1 @@
-using UnityEngine;
-
-public class EntryPoint
-{
-    
-}
+// Bootstrap entry moved to Bootstrap/GameRoot.cs
