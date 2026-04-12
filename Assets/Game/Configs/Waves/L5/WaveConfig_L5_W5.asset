@@ -10,11 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90a36a78857c46e4da95438c4bcf2534, type: 3}
-  m_Name: WaveConfig_L1_W1
+  m_Name: WaveConfig_L5_W5
   m_EditorClassIdentifier: Assembly-CSharp::WaveConfig
   _subWaves:
-  - Enemy: {fileID: 11400000, guid: f0d74bb3d51557a458b207537b77af39, type: 2}
-    Count: 3
-    Interval: 1.5
-  _delayAfter: 3
-  _reward: 25
+  - Enemy: {fileID: 11400000, guid: 83cdd749016efd74aab289eddcbe9c1e, type: 2}
+    Count: 2
+    Interval: 1.8
+    PathIndex: 0
+  - Enemy: {fileID: 11400000, guid: e8fc07fa1bbad3c4290a4045dac071e9, type: 2}
+    Count: 6
+    Interval: 0.8
+    PathIndex: 0
+  _delayAfter: 5
+  _reward: 40

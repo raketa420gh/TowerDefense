@@ -15,7 +15,6 @@ public class GameplayInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<LevelContext>().FromInstance(_levelContext).AsSingle();
-        Container.Bind<Path>().FromInstance(_levelContext.Path).AsSingle();
         Container.Bind<PlayerBase>().FromInstance(_levelContext.PlayerBase).AsSingle();
 
         Container.Bind<Transform>().WithId("EnemyRoot")

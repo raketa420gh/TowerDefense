@@ -11,6 +11,7 @@ public class WaveConfig : ScriptableObject
         public EnemyConfig Enemy;
         public int Count = 1;
         public float Interval = 1f;
+        public int PathIndex = 0;
     }
 
     [SerializeField]

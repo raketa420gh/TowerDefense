@@ -11,7 +11,7 @@ public class LevelConfig : ScriptableObject
     private string _displayName;
 
     [SerializeField]
-    private string _sceneName;
+    private LevelContext _levelPrefab;
 
     [SerializeField]
     private int _startingGold = 300;
@@ -24,7 +24,7 @@ public class LevelConfig : ScriptableObject
 
     public int Id => _id;
     public string DisplayName => _displayName;
-    public string SceneName => _sceneName;
+    public LevelContext LevelPrefab => _levelPrefab;
     public int StartingGold => _startingGold;
     public int BaseHealth => _baseHealth;
     public IReadOnlyList<WaveConfig> Waves => _waves;

@@ -39,7 +39,7 @@ public class GameplayState : GameLoopState
         wallet.SetStartingGold(levelContext.Config.StartingGold);
 
         var spawner = sceneContainer.Resolve<WaveSpawner>();
-        spawner.Run(levelContext.Config.Waves, levelContext.Path);
+        spawner.Run(levelContext.Config.Waves, levelContext.Paths);
     }
 
     public override void Update() { }

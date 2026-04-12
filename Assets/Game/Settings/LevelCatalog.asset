@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelCatalog
   _levels:
   - Id: 1
-    DisplayName: Level 1
+    DisplayName: Прямой путь
     SceneName: Gameplay
-    Config: {fileID: 11400000, guid: 6f445ae50ff03354faea5f70e9ab2cad, type: 2}
+    Config: {fileID: 11400000, guid: bc88b69af0f7a484291e1323ed96ce0d, type: 2}
   - Id: 2
-    DisplayName: Level 2
-    SceneName: Gameplay
-    Config: {fileID: 0}
+    DisplayName: Поворот
+    SceneName: Gameplay_L2
+    Config: {fileID: 11400000, guid: 27df123ab8b518d489e0ca6662424fb5, type: 2}
   - Id: 3
-    DisplayName: Level 3
-    SceneName: Gameplay
-    Config: {fileID: 0}
+    DisplayName: Развилка
+    SceneName: Gameplay_L3
+    Config: {fileID: 11400000, guid: 5de5d2b25b665b14aad5516860922db3, type: 2}
   - Id: 4
-    DisplayName: Level 4
-    SceneName: Gameplay
-    Config: {fileID: 0}
+    DisplayName: Ущелье
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: c9694db3548074a47945a08fd93c5ef1, type: 2}
   - Id: 5
-    DisplayName: Level 5
-    SceneName: Gameplay
-    Config: {fileID: 0}
+    DisplayName: Финал
+    SceneName: Gameplay_L5
+    Config: {fileID: 11400000, guid: d397d89a218a94840a2663d65cd78fc0, type: 2}

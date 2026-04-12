@@ -39,12 +39,12 @@ public class WaveSpawner : IInitializable, IDisposable
         Stop();
     }
 
-    public void Run(IReadOnlyList<WaveConfig> waves, Path path)
+    public void Run(IReadOnlyList<WaveConfig> waves, IReadOnlyList<Path> paths)
     {
         Stop();
         _aliveEnemies = 0;
         _pendingSpawns = 0;
-        _routine = _runner.Run(RunRoutine(waves, path));
+        _routine = _runner.Run(RunRoutine(waves, paths));
     }
 
     public void Stop()
@@ -54,7 +54,7 @@ public class WaveSpawner : IInitializable, IDisposable
         _skipBreak = false;
     }
 
-    private IEnumerator RunRoutine(IReadOnlyList<WaveConfig> waves, Path path)
+    private IEnumerator RunRoutine(IReadOnlyList<WaveConfig> waves, IReadOnlyList<Path> paths)
     {
         for (int i = 0; i < waves.Count; i++)
         {
@@ -63,6 +63,7 @@ public class WaveSpawner : IInitializable, IDisposable
             var wave = waves[i];
             foreach (var sub in wave.SubWaves)
             {
+                var path = paths[Mathf.Clamp(sub.PathIndex, 0, paths.Count - 1)];
                 for (int c = 0; c < sub.Count; c++)
                 {
                     _pendingSpawns++;

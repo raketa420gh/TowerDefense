@@ -21,10 +21,14 @@ public class EnemyConfig : ScriptableObject
     [SerializeField]
     private int _baseDamage = 1;
 
+    [SerializeField]
+    private float _visualScale = 1f;
+
     public string Id => _id;
     public Enemy Prefab => _prefab;
     public int MaxHealth => _maxHealth;
     public float Speed => _speed;
     public int Reward => _reward;
     public int BaseDamage => _baseDamage;
+    public float VisualScale => _visualScale;
 }

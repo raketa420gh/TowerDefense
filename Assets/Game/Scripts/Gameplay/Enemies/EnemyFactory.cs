@@ -17,6 +17,7 @@ public class EnemyFactory
     public Enemy Spawn(EnemyConfig config, Path path)
     {
         var enemy = _container.InstantiatePrefabForComponent<Enemy>(config.Prefab, _root);
+        enemy.transform.localScale = Vector3.one * config.VisualScale;
         enemy.Init(config, path);
         enemy.Health.Died += () =>
         {
