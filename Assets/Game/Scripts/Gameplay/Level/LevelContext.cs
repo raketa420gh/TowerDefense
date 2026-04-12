@@ -26,6 +26,15 @@ public class LevelContext : MonoBehaviour
     [SerializeField]
     private BuildMenuView _buildMenu;
 
+    [SerializeField]
+    private HudView _hud;
+
+    [SerializeField]
+    private LevelCompleteView _completeView;
+
+    [SerializeField]
+    private LevelFailedView _failedView;
+
     public LevelConfig Config => _config;
     public Path Path => _path;
     public PlayerBase PlayerBase => _playerBase;
@@ -34,4 +43,7 @@ public class LevelContext : MonoBehaviour
     public Transform TowerRoot => _towerRoot;
     public Transform ProjectileRoot => _projectileRoot;
     public BuildMenuView BuildMenu => _buildMenu;
+    public HudView Hud => _hud;
+    public LevelCompleteView CompleteView => _completeView;
+    public LevelFailedView FailedView => _failedView;
 }

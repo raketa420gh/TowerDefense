@@ -19,6 +19,10 @@ public class WaveConfig : ScriptableObject
     [SerializeField]
     private float _delayAfter = 5f;
 
+    [SerializeField]
+    private int _reward = 25;
+
     public IReadOnlyList<SubWave> SubWaves => _subWaves;
     public float DelayAfter => _delayAfter;
+    public int Reward => _reward;
 }

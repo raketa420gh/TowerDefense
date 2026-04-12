@@ -17,3 +17,4 @@ MonoBehaviour:
     Count: 3
     Interval: 1.5
   _delayAfter: 3
+  _reward: 25

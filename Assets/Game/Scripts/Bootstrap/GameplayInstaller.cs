@@ -28,7 +28,7 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<ICoroutineRunner>().FromInstance(_coroutineRunner).AsSingle();
 
         Container.Bind<EnemyFactory>().AsSingle();
-        Container.Bind<WaveSpawner>().AsSingle();
+        Container.BindInterfacesAndSelfTo<WaveSpawner>().AsSingle();
 
         Container.Bind<TowerCatalog>().FromInstance(_towerCatalog).AsSingle();
         Container.BindInterfacesAndSelfTo<Wallet>().AsSingle();
@@ -36,6 +36,16 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<TowerFactory>().AsSingle();
 
         Container.Bind<BuildMenuView>().FromInstance(_levelContext.BuildMenu).AsSingle();
+        Container.Bind<HudView>().FromInstance(_levelContext.Hud).AsSingle();
+        Container.Bind<LevelCompleteView>().FromInstance(_levelContext.CompleteView).AsSingle();
+        Container.Bind<LevelFailedView>().FromInstance(_levelContext.FailedView).AsSingle();
+
+        Container.BindInterfacesAndSelfTo<RewardService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<LevelResultService>().AsSingle().NonLazy();
+
         Container.BindInterfacesAndSelfTo<BuildMenuPresenter>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<HudPresenter>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<LevelCompletePresenter>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<LevelFailedPresenter>().AsSingle().NonLazy();
     }
 }

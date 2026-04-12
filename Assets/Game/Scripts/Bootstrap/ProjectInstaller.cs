@@ -28,7 +28,10 @@ public class ProjectInstaller : ScriptableObjectInstaller<ProjectInstaller>
         Container.DeclareSignal<WaveStartedSignal>();
         Container.DeclareSignal<WaveCompletedSignal>();
         Container.DeclareSignal<AllWavesCompletedSignal>();
+        Container.DeclareSignal<WaveBreakStartedSignal>();
         Container.DeclareSignal<LevelFailedSignal>();
+        Container.DeclareSignal<LevelCompletedSignal>();
+        Container.DeclareSignal<WaveEarlyStartRequestedSignal>();
 
         Container.DeclareSignal<GoldChangedSignal>();
         Container.DeclareSignal<TowerBuiltSignal>();
