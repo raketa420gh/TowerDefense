@@ -6,4 +6,5 @@ public class LevelDefinition
     public int Id;
     public string DisplayName;
     public string SceneName;
+    public LevelConfig Config;
 }

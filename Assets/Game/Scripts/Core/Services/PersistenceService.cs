@@ -1,10 +1,11 @@
 using System.IO;
 using UnityEngine;
+using IOPath = System.IO.Path;
 
 public class PersistenceService
 {
     private static string PathFor(string key) =>
-        Path.Combine(Application.persistentDataPath, key + ".json");
+        IOPath.Combine(Application.persistentDataPath, key + ".json");
 
     public void Save<T>(string key, T data)
     {

@@ -26,5 +26,7 @@ public class GameLoopStateMachine : StateMachineController<GameRoot, GameLoopSta
         RegisterState(_container.Instantiate<MainMenuState>(new object[] { this }), State.MainMenu);
         RegisterState(_container.Instantiate<LoadLevelState>(new object[] { this }), State.LoadLevel);
         RegisterState(_container.Instantiate<GameplayState>(new object[] { this }), State.Gameplay);
+        RegisterState(_container.Instantiate<LevelFailedState>(new object[] { this }), State.LevelFailed);
+        RegisterState(_container.Instantiate<LevelCompleteState>(new object[] { this }), State.LevelComplete);
     }
 }

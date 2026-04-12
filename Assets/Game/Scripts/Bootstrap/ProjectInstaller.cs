@@ -19,5 +19,20 @@ public class ProjectInstaller : ScriptableObjectInstaller<ProjectInstaller>
 
         Container.DeclareSignal<LevelStartRequestedSignal>();
         Container.DeclareSignal<LevelLoadedSignal>();
+
+        Container.DeclareSignal<EnemySpawnedSignal>();
+        Container.DeclareSignal<EnemyKilledSignal>();
+        Container.DeclareSignal<EnemyReachedBaseSignal>();
+        Container.DeclareSignal<BaseHealthChangedSignal>();
+        Container.DeclareSignal<BaseDestroyedSignal>();
+        Container.DeclareSignal<WaveStartedSignal>();
+        Container.DeclareSignal<WaveCompletedSignal>();
+        Container.DeclareSignal<AllWavesCompletedSignal>();
+        Container.DeclareSignal<LevelFailedSignal>();
+
+        Container.DeclareSignal<GoldChangedSignal>();
+        Container.DeclareSignal<TowerBuiltSignal>();
+        Container.DeclareSignal<TowerSoldSignal>();
+        Container.DeclareSignal<ProjectileHitSignal>();
     }
 }

@@ -16,15 +16,20 @@ MonoBehaviour:
   - Id: 1
     DisplayName: Level 1
     SceneName: Gameplay
+    Config: {fileID: 11400000, guid: 6f445ae50ff03354faea5f70e9ab2cad, type: 2}
   - Id: 2
     DisplayName: Level 2
     SceneName: Gameplay
+    Config: {fileID: 0}
   - Id: 3
     DisplayName: Level 3
     SceneName: Gameplay
+    Config: {fileID: 0}
   - Id: 4
     DisplayName: Level 4
     SceneName: Gameplay
+    Config: {fileID: 0}
   - Id: 5
     DisplayName: Level 5
     SceneName: Gameplay
+    Config: {fileID: 0}
