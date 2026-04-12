@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
-public class WorldTapRouter : IInitializable, IDisposable
+public class WorldTapRouter : IInitializable, IDisposable, ITickable
 {
     private readonly InputReader _input;
     private readonly LevelContext _levelContext;
+    private bool _isPointerOverUI;
 
     public WorldTapRouter(InputReader input, LevelContext levelContext)
     {
@@ -17,10 +18,14 @@ public class WorldTapRouter : IInitializable, IDisposable
     public void Initialize() => _input.Tap += OnTap;
     public void Dispose() => _input.Tap -= OnTap;
 
+    public void Tick()
+    {
+        _isPointerOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+    }
+
     private void OnTap(Vector2 screenPos)
     {
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-            return;
+        if (_isPointerOverUI) return;
 
         var camera = _levelContext.LevelCamera != null
             ? _levelContext.LevelCamera
