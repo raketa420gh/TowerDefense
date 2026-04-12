@@ -29,6 +29,7 @@ public class PausePresenter : IInitializable, IDisposable
             _view.Hide();
         }
         _signalBus.Subscribe<PauseRequestedSignal>(OnPauseRequested);
+        _signalBus.Subscribe<LevelFailedSignal>(ForceHide);
     }
 
     public void Dispose()
@@ -40,6 +41,7 @@ public class PausePresenter : IInitializable, IDisposable
             _view.BackToMenu -= OnBackToMenu;
         }
         _signalBus.TryUnsubscribe<PauseRequestedSignal>(OnPauseRequested);
+        _signalBus.TryUnsubscribe<LevelFailedSignal>(ForceHide);
         if (_isPaused) Time.timeScale = 1f;
     }
 

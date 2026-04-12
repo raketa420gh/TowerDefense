@@ -29,6 +29,7 @@ public class HudPresenter : IInitializable, IDisposable, ITickable
         _signalBus.Subscribe<WaveStartedSignal>(OnWaveStarted);
         _signalBus.Subscribe<WaveBreakStartedSignal>(OnWaveBreakStarted);
         _signalBus.Subscribe<AllWavesCompletedSignal>(OnAllWavesCompleted);
+        _signalBus.Subscribe<LevelFailedSignal>(OnLevelFailed);
 
         _view.SetGold(_wallet.Current);
         _view.Show();
@@ -43,6 +44,7 @@ public class HudPresenter : IInitializable, IDisposable, ITickable
         _signalBus.TryUnsubscribe<WaveStartedSignal>(OnWaveStarted);
         _signalBus.TryUnsubscribe<WaveBreakStartedSignal>(OnWaveBreakStarted);
         _signalBus.TryUnsubscribe<AllWavesCompletedSignal>(OnAllWavesCompleted);
+        _signalBus.TryUnsubscribe<LevelFailedSignal>(OnLevelFailed);
     }
 
     public void Tick()
@@ -77,7 +79,10 @@ public class HudPresenter : IInitializable, IDisposable, ITickable
     {
         _breakActive = false;
         _view.SetEarlyStartVisible(false);
+        _view.Hide();
     }
+
+    private void OnLevelFailed() => _view.Hide();
 
     private void OnPauseClicked() => _signalBus.Fire(new PauseRequestedSignal());
 

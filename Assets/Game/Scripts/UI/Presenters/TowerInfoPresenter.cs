@@ -32,6 +32,8 @@ public class TowerInfoPresenter : IInitializable, IDisposable
 
         _signalBus.Subscribe<GoldChangedSignal>(OnGoldChanged);
         _signalBus.Subscribe<TowerUpgradedSignal>(OnTowerUpgraded);
+        _signalBus.Subscribe<LevelFailedSignal>(Close);
+        _signalBus.Subscribe<AllWavesCompletedSignal>(Close);
 
         _view.Hide();
     }
@@ -47,6 +49,8 @@ public class TowerInfoPresenter : IInitializable, IDisposable
 
         _signalBus.TryUnsubscribe<GoldChangedSignal>(OnGoldChanged);
         _signalBus.TryUnsubscribe<TowerUpgradedSignal>(OnTowerUpgraded);
+        _signalBus.TryUnsubscribe<LevelFailedSignal>(Close);
+        _signalBus.TryUnsubscribe<AllWavesCompletedSignal>(Close);
     }
 
     private void OnTowerClicked(TowerSlot slot)

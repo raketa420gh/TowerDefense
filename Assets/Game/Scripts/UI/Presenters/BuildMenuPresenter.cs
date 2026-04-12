@@ -31,6 +31,8 @@ public class BuildMenuPresenter : IInitializable, IDisposable
         _view.TowerPicked += OnTowerPicked;
         _view.Dismissed += Close;
         _signalBus.Subscribe<GoldChangedSignal>(OnGoldChanged);
+        _signalBus.Subscribe<LevelFailedSignal>(Close);
+        _signalBus.Subscribe<AllWavesCompletedSignal>(Close);
 
         _view.Hide();
     }
@@ -43,6 +45,8 @@ public class BuildMenuPresenter : IInitializable, IDisposable
         _view.TowerPicked -= OnTowerPicked;
         _view.Dismissed -= Close;
         _signalBus.TryUnsubscribe<GoldChangedSignal>(OnGoldChanged);
+        _signalBus.TryUnsubscribe<LevelFailedSignal>(Close);
+        _signalBus.TryUnsubscribe<AllWavesCompletedSignal>(Close);
     }
 
     private void OnSlotClicked(TowerSlot slot)
