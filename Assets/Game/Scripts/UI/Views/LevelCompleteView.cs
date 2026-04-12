@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ public class LevelCompleteView : DisplayableView
     public event Action Continue;
 
     [SerializeField]
-    private Text _titleLabel;
+    private TextMeshProUGUI _titleLabel;
 
     [SerializeField]
     private GameObject[] _starIcons;

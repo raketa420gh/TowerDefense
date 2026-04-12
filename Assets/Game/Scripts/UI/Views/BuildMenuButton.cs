@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class BuildMenuButton : MonoBehaviour
     private Image _icon;
 
     [SerializeField]
-    private Text _costLabel;
+    private TextMeshProUGUI _costLabel;
 
     private TowerConfig _config;
 

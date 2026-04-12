@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,19 +10,19 @@ public class TowerInfoView : DisplayableView
     public event Action CloseClicked;
 
     [SerializeField]
-    private Text _nameLabel;
+    private TextMeshProUGUI _nameLabel;
 
     [SerializeField]
-    private Text _levelLabel;
+    private TextMeshProUGUI _levelLabel;
 
     [SerializeField]
-    private Text _statsLabel;
+    private TextMeshProUGUI _statsLabel;
 
     [SerializeField]
-    private Text _upgradeCostLabel;
+    private TextMeshProUGUI _upgradeCostLabel;
 
     [SerializeField]
-    private Text _sellRefundLabel;
+    private TextMeshProUGUI _sellRefundLabel;
 
     [SerializeField]
     private Button _upgradeButton;

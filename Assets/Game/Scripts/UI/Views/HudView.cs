@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,16 +9,16 @@ public class HudView : DisplayableView
     public event Action PauseClicked;
 
     [SerializeField]
-    private Text _goldLabel;
+    private TextMeshProUGUI _goldLabel;
 
     [SerializeField]
-    private Text _baseHpLabel;
+    private TextMeshProUGUI _baseHpLabel;
 
     [SerializeField]
-    private Text _waveLabel;
+    private TextMeshProUGUI _waveLabel;
 
     [SerializeField]
-    private Text _breakTimerLabel;
+    private TextMeshProUGUI _breakTimerLabel;
 
     [SerializeField]
     private Button _earlyStartButton;

@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,7 @@ public class LevelButton : MonoBehaviour
     private GameObject[] _stars;
 
     [SerializeField]
-    private Text _label;
+    private TextMeshProUGUI _label;
 
     public int LevelId => _levelId;
 
