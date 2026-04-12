@@ -17,29 +17,29 @@ public class ProjectInstaller : ScriptableObjectInstaller<ProjectInstaller>
         Container.Bind<PlayerProgress>().AsSingle();
         Container.Bind<GameLoopStateMachine>().AsSingle();
 
-        Container.DeclareSignal<LevelStartRequestedSignal>();
-        Container.DeclareSignal<LevelLoadedSignal>();
+        Container.DeclareSignal<LevelStartRequestedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<LevelLoadedSignal>().OptionalSubscriber();
 
-        Container.DeclareSignal<EnemySpawnedSignal>();
-        Container.DeclareSignal<EnemyKilledSignal>();
-        Container.DeclareSignal<EnemyReachedBaseSignal>();
-        Container.DeclareSignal<BaseHealthChangedSignal>();
-        Container.DeclareSignal<BaseDestroyedSignal>();
-        Container.DeclareSignal<WaveStartedSignal>();
-        Container.DeclareSignal<WaveCompletedSignal>();
-        Container.DeclareSignal<AllWavesCompletedSignal>();
-        Container.DeclareSignal<WaveBreakStartedSignal>();
-        Container.DeclareSignal<LevelFailedSignal>();
-        Container.DeclareSignal<LevelCompletedSignal>();
-        Container.DeclareSignal<WaveEarlyStartRequestedSignal>();
+        Container.DeclareSignal<EnemySpawnedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<EnemyKilledSignal>().OptionalSubscriber();
+        Container.DeclareSignal<EnemyReachedBaseSignal>().OptionalSubscriber();
+        Container.DeclareSignal<BaseHealthChangedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<BaseDestroyedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<WaveStartedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<WaveCompletedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<AllWavesCompletedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<WaveBreakStartedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<LevelFailedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<LevelCompletedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<WaveEarlyStartRequestedSignal>().OptionalSubscriber();
 
-        Container.DeclareSignal<GoldChangedSignal>();
-        Container.DeclareSignal<TowerBuiltSignal>();
-        Container.DeclareSignal<TowerSoldSignal>();
-        Container.DeclareSignal<TowerUpgradedSignal>();
-        Container.DeclareSignal<ProjectileHitSignal>();
-        Container.DeclareSignal<PauseRequestedSignal>();
-        Container.DeclareSignal<PauseResumedSignal>();
+        Container.DeclareSignal<GoldChangedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<TowerBuiltSignal>().OptionalSubscriber();
+        Container.DeclareSignal<TowerSoldSignal>().OptionalSubscriber();
+        Container.DeclareSignal<TowerUpgradedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<ProjectileHitSignal>().OptionalSubscriber();
+        Container.DeclareSignal<PauseRequestedSignal>().OptionalSubscriber();
+        Container.DeclareSignal<PauseResumedSignal>().OptionalSubscriber();
 
         var sfx = Resources.Load<SfxConfig>("SfxConfig");
         if (sfx != null)

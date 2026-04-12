@@ -7,6 +7,6 @@ public class CoroutineRunner : MonoBehaviour, ICoroutineRunner
 
     public void Stop(Coroutine routine)
     {
-        if (routine != null) StopCoroutine(routine);
+        if (routine != null && this) StopCoroutine(routine);
     }
 }
