@@ -17,6 +17,8 @@ public class LevelCompleteState : GameLoopState
 
     public override void OnStateActivated()
     {
+        Time.timeScale = 1f;
+
         var sceneContext = Object.FindFirstObjectByType<SceneContext>();
         var sceneContainer = sceneContext != null ? sceneContext.Container : _container;
 

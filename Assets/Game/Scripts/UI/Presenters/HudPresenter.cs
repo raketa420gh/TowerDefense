@@ -23,6 +23,7 @@ public class HudPresenter : IInitializable, IDisposable, ITickable
     public void Initialize()
     {
         _view.EarlyStartClicked += OnEarlyStartClicked;
+        _view.PauseClicked += OnPauseClicked;
         _signalBus.Subscribe<GoldChangedSignal>(OnGoldChanged);
         _signalBus.Subscribe<BaseHealthChangedSignal>(OnBaseHealthChanged);
         _signalBus.Subscribe<WaveStartedSignal>(OnWaveStarted);
@@ -36,6 +37,7 @@ public class HudPresenter : IInitializable, IDisposable, ITickable
     public void Dispose()
     {
         _view.EarlyStartClicked -= OnEarlyStartClicked;
+        _view.PauseClicked -= OnPauseClicked;
         _signalBus.TryUnsubscribe<GoldChangedSignal>(OnGoldChanged);
         _signalBus.TryUnsubscribe<BaseHealthChangedSignal>(OnBaseHealthChanged);
         _signalBus.TryUnsubscribe<WaveStartedSignal>(OnWaveStarted);
@@ -76,6 +78,8 @@ public class HudPresenter : IInitializable, IDisposable, ITickable
         _breakActive = false;
         _view.SetEarlyStartVisible(false);
     }
+
+    private void OnPauseClicked() => _signalBus.Fire(new PauseRequestedSignal());
 
     private void OnEarlyStartClicked()
     {

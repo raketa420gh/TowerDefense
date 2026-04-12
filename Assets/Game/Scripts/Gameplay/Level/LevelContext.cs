@@ -49,6 +49,12 @@ public class LevelContext : MonoBehaviour
     [SerializeField]
     private TowerInfoView _towerInfoView;
 
+    [SerializeField]
+    private PauseView _pauseView;
+
+    [SerializeField]
+    private Camera _levelCamera;
+
     public LevelConfig Config => _config;
     public Path[] Paths => _paths;
     public PlayerBase PlayerBase => _playerBase;
@@ -61,6 +67,8 @@ public class LevelContext : MonoBehaviour
     public LevelCompleteView CompleteView => _completeView;
     public LevelFailedView FailedView => _failedView;
     public TowerInfoView TowerInfoView => _towerInfoView;
+    public PauseView PauseView => _pauseView;
+    public Camera LevelCamera => _levelCamera;
 
     public void SetConfig(LevelConfig config) => _config = config;
 }

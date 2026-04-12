@@ -39,6 +39,11 @@ public class Tower : MonoBehaviour
 
     public void AttachSlot(TowerSlot slot) => _slot = slot;
 
+    public void OnTap()
+    {
+        if (_slot != null) _slot.OnTap();
+    }
+
     public void ApplyUpgrade()
     {
         _totalInvested += _config.GetUpgradeCost(_level);

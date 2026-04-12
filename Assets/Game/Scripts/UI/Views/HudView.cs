@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class HudView : DisplayableView
 {
     public event Action EarlyStartClicked;
+    public event Action PauseClicked;
 
     [SerializeField]
     private Text _goldLabel;
@@ -21,10 +22,15 @@ public class HudView : DisplayableView
     [SerializeField]
     private Button _earlyStartButton;
 
+    [SerializeField]
+    private Button _pauseButton;
+
     protected override void Awake()
     {
         base.Awake();
         _earlyStartButton.onClick.AddListener(() => EarlyStartClicked?.Invoke());
+        if (_pauseButton != null)
+            _pauseButton.onClick.AddListener(() => PauseClicked?.Invoke());
         SetEarlyStartVisible(false);
     }
 

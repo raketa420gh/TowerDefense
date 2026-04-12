@@ -28,9 +28,11 @@ public class TowerSlot : MonoBehaviour
         if (_highlight != null) _highlight.SetActive(true);
     }
 
-    private void OnMouseDown()
+    public void OnTap()
     {
         if (IsOccupied) TowerClicked?.Invoke(this);
         else Clicked?.Invoke(this);
     }
+
+    private void OnMouseDown() => OnTap();
 }

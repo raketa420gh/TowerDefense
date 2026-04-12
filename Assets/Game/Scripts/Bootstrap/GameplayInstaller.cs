@@ -39,6 +39,8 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<LevelCompleteView>().FromInstance(_levelContext.CompleteView).AsSingle();
         Container.Bind<LevelFailedView>().FromInstance(_levelContext.FailedView).AsSingle();
         Container.Bind<TowerInfoView>().FromInstance(_levelContext.TowerInfoView).AsSingle();
+        if (_levelContext.PauseView != null)
+            Container.Bind<PauseView>().FromInstance(_levelContext.PauseView).AsSingle();
         Container.Bind<TowerUpgradeService>().AsSingle();
 
         Container.BindInterfacesAndSelfTo<RewardService>().AsSingle().NonLazy();
@@ -49,5 +51,9 @@ public class GameplayInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<LevelCompletePresenter>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<LevelFailedPresenter>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<TowerInfoPresenter>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PausePresenter>().AsSingle().NonLazy();
+
+        Container.BindInterfacesAndSelfTo<InputReader>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<WorldTapRouter>().AsSingle().NonLazy();
     }
 }

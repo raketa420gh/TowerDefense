@@ -19,3 +19,6 @@ public struct TowerUpgradedSignal { public Tower Tower; public int Level; }
 public struct ProjectileHitSignal { public Enemy Enemy; public int Damage; }
 
 public struct WaveEarlyStartRequestedSignal { }
+
+public struct PauseRequestedSignal { }
+public struct PauseResumedSignal { }

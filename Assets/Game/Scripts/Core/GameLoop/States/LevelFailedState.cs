@@ -20,11 +20,22 @@ public class LevelFailedState : GameLoopState
 
     public override void OnStateActivated()
     {
+        Time.timeScale = 1f;
+
         var sceneContext = Object.FindFirstObjectByType<SceneContext>();
         var sceneContainer = sceneContext != null ? sceneContext.Container : _container;
 
         var levelContext = sceneContainer.Resolve<LevelContext>();
         _lastLevelId = levelContext.Config.Id;
+
+        var spawner = sceneContainer.Resolve<WaveSpawner>();
+        spawner.Stop();
+
+        foreach (var e in Object.FindObjectsByType<Enemy>(FindObjectsSortMode.None))
+            Object.Destroy(e.gameObject);
+        foreach (var p in Object.FindObjectsByType<Projectile>(FindObjectsSortMode.None))
+            Object.Destroy(p.gameObject);
+
         _presenter = sceneContainer.Resolve<LevelFailedPresenter>();
 
         _presenter.Retry += OnRetry;

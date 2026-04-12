@@ -38,5 +38,12 @@ public class ProjectInstaller : ScriptableObjectInstaller<ProjectInstaller>
         Container.DeclareSignal<TowerSoldSignal>();
         Container.DeclareSignal<TowerUpgradedSignal>();
         Container.DeclareSignal<ProjectileHitSignal>();
+        Container.DeclareSignal<PauseRequestedSignal>();
+        Container.DeclareSignal<PauseResumedSignal>();
+
+        var sfx = Resources.Load<SfxConfig>("SfxConfig");
+        if (sfx != null)
+            Container.Bind<SfxConfig>().FromInstance(sfx).AsSingle();
+        Container.BindInterfacesAndSelfTo<AudioService>().AsSingle().NonLazy();
     }
 }
