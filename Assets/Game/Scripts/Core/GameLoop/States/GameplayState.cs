@@ -9,6 +9,7 @@ public class GameplayState : GameLoopState
 
     private PausePresenter _pausePresenter;
     private int _lastLevelId;
+    private bool _gameEnded;
 
     public GameplayState(GameLoopStateMachine stateMachine, DiContainer container,
         SignalBus signalBus, SceneLoader sceneLoader) : base(stateMachine)
@@ -28,6 +29,7 @@ public class GameplayState : GameLoopState
     public override void OnStateActivated()
     {
         Debug.Log("[GameplayState] activated");
+        _gameEnded = false;
         Time.timeScale = 1f;
 
         var levelContext = Object.FindFirstObjectByType<LevelContext>();
@@ -74,12 +76,16 @@ public class GameplayState : GameLoopState
 
     private void OnBaseDestroyed()
     {
+        if (_gameEnded) return;
+        _gameEnded = true;
         _signalBus.Fire(new LevelFailedSignal());
         StateMachine.SetState(GameLoopStateMachine.State.LevelFailed);
     }
 
     private void OnAllWavesCompleted()
     {
+        if (_gameEnded) return;
+        _gameEnded = true;
         StateMachine.SetState(GameLoopStateMachine.State.LevelComplete);
     }
 
