@@ -22,6 +22,7 @@ public class GameplayState : GameLoopState
     {
         _signalBus.Subscribe<BaseDestroyedSignal>(OnBaseDestroyed);
         _signalBus.Subscribe<AllWavesCompletedSignal>(OnAllWavesCompleted);
+        _signalBus.Subscribe<EnemyReachedBaseSignal>(OnEnemyReachedBase);
     }
 
     public override void OnStateActivated()
@@ -68,6 +69,8 @@ public class GameplayState : GameLoopState
             _pausePresenter = null;
         }
     }
+
+    private void OnEnemyReachedBase(EnemyReachedBaseSignal _) => OnBaseDestroyed();
 
     private void OnBaseDestroyed()
     {

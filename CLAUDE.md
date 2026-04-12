@@ -67,6 +67,18 @@ This project has **UnityMCP** connected. Use MCP tools to interact with the edit
 - Poll `editor_state` resource `isCompiling` field to wait for domain reload after script edits
 - Always check `mcpforunity://custom-tools` resource for project-specific tools
 
+## Game Loop Mechanics
+
+**Win condition:** All enemies in all waves are killed → `AllWavesCompletedSignal` → `LevelComplete`.
+
+**Lose condition:** ANY enemy reaches the base → `EnemyReachedBaseSignal` → immediate `LevelFailed`.  
+(Also: base HP hits 0 via `BaseDestroyedSignal` → `LevelFailed`, but in practice `EnemyReachedBaseSignal` fires first.)
+
+Both subscriptions live in `GameplayState.OnStateRegistered()` (`Assets/Game/Scripts/Core/GameLoop/States/GameplayState.cs`).
+
+Signal flow for lose:  
+`EnemyMovement._reachedEnd=true` → `EnemyBaseDamager.Update` → `EnemyReachedBaseSignal` → `GameplayState.OnEnemyReachedBase` → `LevelFailed`
+
 ## Running Tests
 
 Tests use Unity Test Framework (`com.unity.test-framework` 1.6.0). Run via Unity Editor: **Window → General → Test Runner**, or via MCP tool `run_tests`.

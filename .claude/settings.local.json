@@ -16,7 +16,10 @@
       "mcp__UnityMCP__manage_build",
       "mcp__UnityMCP__manage_asset",
       "mcp__UnityMCP__manage_prefabs",
-      "mcp__UnityMCP__find_gameobjects"
+      "mcp__UnityMCP__find_gameobjects",
+      "Bash(find D:\\\\Game Development\\\\TowerDefense\\\\Assets\\\\Game\\\\Scripts:*)",
+      "Bash(find D:\\\\Game Development\\\\TowerDefense\\\\Assets\\\\Game:*)",
+      "mcp__UnityMCP__manage_camera"
     ]
   }
 }
