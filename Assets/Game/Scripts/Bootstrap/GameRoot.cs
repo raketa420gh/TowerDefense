@@ -15,11 +15,16 @@ public class GameRoot : MonoBehaviour
 
     private void Start()
     {
+        if (_stateMachine == null)
+        {
+            Debug.LogError("[GameRoot] _stateMachine is null — Zenject injection failed. Check ProjectContext / ProjectInstaller for binding errors.");
+            return;
+        }
         _stateMachine.Initialise(this, GameLoopStateMachine.State.Initialize);
     }
 
     private void Update()
     {
-        _stateMachine.ActiveState?.Update();
+        _stateMachine?.ActiveState?.Update();
     }
 }

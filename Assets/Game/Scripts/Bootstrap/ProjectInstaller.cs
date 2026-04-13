@@ -10,6 +10,7 @@ public class ProjectInstaller : ScriptableObjectInstaller<ProjectInstaller>
     public override void InstallBindings()
     {
         SignalBusInstaller.Install(Container);
+        Container.Bind<GameRoot>().FromComponentInHierarchy().AsSingle().NonLazy();
 
         Container.Bind<LevelCatalog>().FromInstance(_levelCatalog).AsSingle();
         Container.Bind<PersistenceService>().AsSingle();

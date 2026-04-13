@@ -27,6 +27,7 @@ public class HudPresenter : IInitializable, IDisposable, ITickable
         _signalBus.Subscribe<GoldChangedSignal>(OnGoldChanged);
         _signalBus.Subscribe<BaseHealthChangedSignal>(OnBaseHealthChanged);
         _signalBus.Subscribe<WaveStartedSignal>(OnWaveStarted);
+        _signalBus.Subscribe<WaveCompletedSignal>(OnWaveCompleted);
         _signalBus.Subscribe<WaveBreakStartedSignal>(OnWaveBreakStarted);
         _signalBus.Subscribe<AllWavesCompletedSignal>(OnAllWavesCompleted);
         _signalBus.Subscribe<LevelFailedSignal>(OnLevelFailed);
@@ -42,6 +43,7 @@ public class HudPresenter : IInitializable, IDisposable, ITickable
         _signalBus.TryUnsubscribe<GoldChangedSignal>(OnGoldChanged);
         _signalBus.TryUnsubscribe<BaseHealthChangedSignal>(OnBaseHealthChanged);
         _signalBus.TryUnsubscribe<WaveStartedSignal>(OnWaveStarted);
+        _signalBus.TryUnsubscribe<WaveCompletedSignal>(OnWaveCompleted);
         _signalBus.TryUnsubscribe<WaveBreakStartedSignal>(OnWaveBreakStarted);
         _signalBus.TryUnsubscribe<AllWavesCompletedSignal>(OnAllWavesCompleted);
         _signalBus.TryUnsubscribe<LevelFailedSignal>(OnLevelFailed);
@@ -66,6 +68,9 @@ public class HudPresenter : IInitializable, IDisposable, ITickable
         _view.SetWave(s.Index, s.Total);
         _view.SetEarlyStartVisible(false);
     }
+
+    private void OnWaveCompleted(WaveCompletedSignal _) =>
+        _view.SetEarlyStartVisible(false);
 
     private void OnWaveBreakStarted(WaveBreakStartedSignal s)
     {

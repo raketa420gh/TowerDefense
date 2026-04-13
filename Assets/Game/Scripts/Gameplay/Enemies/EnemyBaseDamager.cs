@@ -26,6 +26,7 @@ public class EnemyBaseDamager : MonoBehaviour
     private void Update()
     {
         if (_applied || !_movement.ReachedEnd) return;
+        if (_enemy.Health.IsDead) return;
         _applied = true;
         _base.ApplyDamage(_enemy.Config.BaseDamage);
         _signalBus.Fire(new EnemyReachedBaseSignal());
