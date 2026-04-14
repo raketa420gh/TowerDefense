@@ -27,7 +27,7 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<ICoroutineRunner>().FromInstance(_coroutineRunner).AsSingle();
 
         Container.Bind<EnemyFactory>().AsSingle();
-        Container.BindInterfacesAndSelfTo<WaveSpawner>().AsSingle();
+        Container.BindInterfacesAndSelfTo<WaveSpawner>().AsSingle().NonLazy();
 
         Container.Bind<TowerCatalog>().FromInstance(_towerCatalog).AsSingle();
         Container.BindInterfacesAndSelfTo<Wallet>().AsSingle();
