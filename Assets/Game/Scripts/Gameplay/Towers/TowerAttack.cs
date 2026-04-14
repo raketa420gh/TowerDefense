@@ -9,6 +9,9 @@ public class TowerAttack : MonoBehaviour
     [SerializeField]
     private Transform _muzzle;
 
+    [SerializeField]
+    private ParticleSystem _muzzleFlash;
+
     private ProjectilePool _pool;
     private Tower _tower;
     private LayerMask _enemyMask;
@@ -78,6 +81,7 @@ public class TowerAttack : MonoBehaviour
 
         _pool.Spawn(_tower.Config.ProjectilePrefab, origin, _currentTarget,
             impact, _tower.Config.ProjectileSpeed);
+        if (_muzzleFlash != null) _muzzleFlash.Play();
     }
 
     private Enemy FindNearest()

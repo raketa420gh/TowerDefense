@@ -34,7 +34,7 @@ public class Tower : MonoBehaviour
         _level = 1;
         _totalInvested = config.Cost;
         _attack.Init(this);
-        if (_meshSwitcher != null) _meshSwitcher.Apply(config.UpgradeMeshes, _level);
+        if (_meshSwitcher != null) _meshSwitcher.Apply(_level);
     }
 
     public void AttachSlot(TowerSlot slot) => _slot = slot;
@@ -49,6 +49,6 @@ public class Tower : MonoBehaviour
         _totalInvested += _config.GetUpgradeCost(_level);
         _level++;
         _attack.RefreshStats();
-        if (_meshSwitcher != null) _meshSwitcher.Apply(_config.UpgradeMeshes, _level);
+        if (_meshSwitcher != null) _meshSwitcher.Apply(_level);
     }
 }

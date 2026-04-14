@@ -3,12 +3,11 @@ using UnityEngine;
 public class TowerMeshSwitcher : MonoBehaviour
 {
     [SerializeField]
-    private MeshFilter _target;
+    private GameObject[] _levelVisuals;
 
-    public void Apply(Mesh[] meshes, int level)
+    public void Apply(int level)
     {
-        if (_target == null || meshes == null || meshes.Length == 0) return;
-        var idx = Mathf.Clamp(level - 1, 0, meshes.Length - 1);
-        _target.sharedMesh = meshes[idx];
+        for (int i = 0; i < _levelVisuals.Length; i++)
+            if (_levelVisuals[i]) _levelVisuals[i].SetActive(i == level - 1);
     }
 }

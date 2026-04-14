@@ -36,10 +36,6 @@ public class TowerConfig : ScriptableObject
     [SerializeField]
     private int _maxLevel = 3;
 
-    [Header("Upgrade visuals (middle-a/b/c)")]
-    [SerializeField]
-    private Mesh[] _upgradeMeshes;
-
     [Header("Area")]
     [SerializeField]
     private float _splashRadius;
@@ -63,7 +59,6 @@ public class TowerConfig : ScriptableObject
     public float FireRate => _fireRate;
     public float ProjectileSpeed => _projectileSpeed;
     public int MaxLevel => _maxLevel;
-    public Mesh[] UpgradeMeshes => _upgradeMeshes;
     public float SplashRadius => _splashRadius;
     public float SlowMultiplier => _slowMultiplier;
     public float SlowDuration => _slowDuration;

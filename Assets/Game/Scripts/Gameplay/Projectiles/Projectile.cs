@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _impactVfxPrefab;
+
     private Enemy _target;
     private ProjectileImpact _impact;
     private float _speed;
@@ -42,6 +45,9 @@ public class Projectile : MonoBehaviour
 
     private void ApplyImpact(Vector3 hitPos)
     {
+        if (_impactVfxPrefab != null)
+            Destroy(Instantiate(_impactVfxPrefab, hitPos, Quaternion.identity), 2f);
+
         if (_impact.SplashRadius > 0f)
         {
             AreaDamage.Apply(hitPos, _impact);
