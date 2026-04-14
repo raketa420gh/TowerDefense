@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c2248cc49f5f547814a57cd3eda0ae, type: 3}
+  m_Name: LevelConfig_L20
+  m_EditorClassIdentifier: Assembly-CSharp::LevelConfig
+  _id: 20
+  _displayName: Командир
+  _levelPrefab: {fileID: 0}
+  _startingGold: 380
+  _baseHealth: 10
+  _availableTowers:
+  - {fileID: 11400000, guid: 7af87421651616149a56f835556710f1, type: 2}
+  - {fileID: 11400000, guid: 2cc99cee2ee7fe349921f35390d70e47, type: 2}
+  - {fileID: 11400000, guid: 4a0f6192c7db24e40aae1e304e4c6793, type: 2}
+  - {fileID: 11400000, guid: d019c8ede249f7b43a250a80e1033b5b, type: 2}
+  _waves:
+  - {fileID: 11400000, guid: 1b5baca12f574ad39c2dd3efd35ba74c, type: 2}
+  - {fileID: 11400000, guid: 24f94c2818b7484398c7549047f8e20f, type: 2}
+  - {fileID: 11400000, guid: 47fa3ba7559c4eb2833063be29ecc2cf, type: 2}
+  - {fileID: 11400000, guid: 19487810188e403185c37e936cc6f254, type: 2}
+  - {fileID: 11400000, guid: 95ae67830c8e43638793ad3012a82835, type: 2}
+  - {fileID: 11400000, guid: eefd82e7f6e54d33ab5bba6533ce19d6, type: 2}
+  - {fileID: 11400000, guid: a1f55c848419400cbfd31b3fc36075ed, type: 2}
+  - {fileID: 11400000, guid: 1ad2e8193d7346629ee99b2d09c9cc7b, type: 2}
+  - {fileID: 11400000, guid: 22bf265893444e8cb7c7fbef7429de12, type: 2}
+  - {fileID: 11400000, guid: c1666e6c8c3b4229b51a0bbfa7f36aab, type: 2}
+  - {fileID: 11400000, guid: 1a209cdf7ac2403b8e2f06336229de9c, type: 2}
+  - {fileID: 11400000, guid: f0c0734a99cf4dbf9f59f9af25cb13c0, type: 2}
+  - {fileID: 11400000, guid: d1bea05e09334affa593159e1796737f, type: 2}

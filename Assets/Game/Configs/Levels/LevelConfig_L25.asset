@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c2248cc49f5f547814a57cd3eda0ae, type: 3}
+  m_Name: LevelConfig_L25
+  m_EditorClassIdentifier: Assembly-CSharp::LevelConfig
+  _id: 25
+  _displayName: Финал (Boss Rush)
+  _levelPrefab: {fileID: 0}
+  _startingGold: 450
+  _baseHealth: 5
+  _availableTowers:
+  - {fileID: 11400000, guid: 7af87421651616149a56f835556710f1, type: 2}
+  - {fileID: 11400000, guid: 2cc99cee2ee7fe349921f35390d70e47, type: 2}
+  - {fileID: 11400000, guid: 4a0f6192c7db24e40aae1e304e4c6793, type: 2}
+  - {fileID: 11400000, guid: d019c8ede249f7b43a250a80e1033b5b, type: 2}
+  _waves:
+  - {fileID: 11400000, guid: 1b3ed95f87a3459dbd286647565648df, type: 2}
+  - {fileID: 11400000, guid: 19f1cd2fe1af458797d99ffa701988ed, type: 2}
+  - {fileID: 11400000, guid: 8999887e99e041489db8426b4482268f, type: 2}
+  - {fileID: 11400000, guid: 44631348defb45558835aa22b604ef88, type: 2}
+  - {fileID: 11400000, guid: 0555f80f8910435b95fb4d005d02a2ce, type: 2}
+  - {fileID: 11400000, guid: 11207e0c961d496398c6c39f751e14a0, type: 2}
+  - {fileID: 11400000, guid: 5ecb53b0ca5e436c9920e850214f7789, type: 2}
+  - {fileID: 11400000, guid: 3f90631937f64fd58887aefbaf93216e, type: 2}
+  - {fileID: 11400000, guid: d8f107c3e45d4f7cb519540978617dff, type: 2}
+  - {fileID: 11400000, guid: f625bc6aef724183921989e866e15357, type: 2}
+  - {fileID: 11400000, guid: 26fdd0f62b834453a5792bb169a8c504, type: 2}
+  - {fileID: 11400000, guid: 4bfa38fb02474431827651954c70d860, type: 2}
+  - {fileID: 11400000, guid: 0639b22e57d04259ae5bf82669c52505, type: 2}
+  - {fileID: 11400000, guid: 7bb5f532033a46e5a6297ed8bce15cea, type: 2}
+  - {fileID: 11400000, guid: 1b367dfab5b64e97bfa93af750663c36, type: 2}

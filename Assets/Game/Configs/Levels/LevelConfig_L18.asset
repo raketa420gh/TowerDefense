@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c2248cc49f5f547814a57cd3eda0ae, type: 3}
+  m_Name: LevelConfig_L18
+  m_EditorClassIdentifier: Assembly-CSharp::LevelConfig
+  _id: 18
+  _displayName: Броня
+  _levelPrefab: {fileID: 0}
+  _startingGold: 360
+  _baseHealth: 10
+  _availableTowers:
+  - {fileID: 11400000, guid: 7af87421651616149a56f835556710f1, type: 2}
+  - {fileID: 11400000, guid: 2cc99cee2ee7fe349921f35390d70e47, type: 2}
+  - {fileID: 11400000, guid: 4a0f6192c7db24e40aae1e304e4c6793, type: 2}
+  - {fileID: 11400000, guid: d019c8ede249f7b43a250a80e1033b5b, type: 2}
+  _waves:
+  - {fileID: 11400000, guid: 54b21597dec847deb39b22f5d828a7ae, type: 2}
+  - {fileID: 11400000, guid: a8fcfc2be41d4821b21b163cb4c9ed3d, type: 2}
+  - {fileID: 11400000, guid: 3c05231c3fe34daf81f1159e76b5768a, type: 2}
+  - {fileID: 11400000, guid: 7985a40a97aa44d783ccb3fb46641c77, type: 2}
+  - {fileID: 11400000, guid: 7ab32f983b5d4540958fab2d7afcc505, type: 2}
+  - {fileID: 11400000, guid: d2303bbcfa5544178473541b04115b21, type: 2}
+  - {fileID: 11400000, guid: d3223dcefa6044f89ba01f18b4f7484f, type: 2}
+  - {fileID: 11400000, guid: 18b1e610df584563af610095bb6735d0, type: 2}
+  - {fileID: 11400000, guid: a0a6be4449e34dc08c933472fadd0374, type: 2}
+  - {fileID: 11400000, guid: 2026a0f471c74cb8a4f6a30be97edea4, type: 2}
+  - {fileID: 11400000, guid: fb45004c6d504d30ac7584442eb7fdbd, type: 2}
+  - {fileID: 11400000, guid: b35ba9325b774b629b644501171b7f89, type: 2}
+  - {fileID: 11400000, guid: afdf8ed253244cd7b344bd4a14142deb, type: 2}

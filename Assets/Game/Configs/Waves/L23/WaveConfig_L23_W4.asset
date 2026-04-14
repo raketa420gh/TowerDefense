@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a36a78857c46e4da95438c4bcf2534, type: 3}
+  m_Name: WaveConfig_L23_W4
+  m_EditorClassIdentifier: Assembly-CSharp::WaveConfig
+  _subWaves:
+  - Enemy: {fileID: 11400000, guid: b067081d4b70c33419a4fdcb4b468bee, type: 2}
+    Count: 9
+    Interval: 0.7
+    PathIndex: 0
+  - Enemy: {fileID: 11400000, guid: 83cdd749016efd74aab289eddcbe9c1e, type: 2}
+    Count: 5
+    Interval: 1.0
+    PathIndex: 1
+  - Enemy: {fileID: 11400000, guid: e8fc07fa1bbad3c4290a4045dac071e9, type: 2}
+    Count: 20
+    Interval: 0.35
+    PathIndex: 2
+  _delayAfter: 4
+  _reward: 114

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c2248cc49f5f547814a57cd3eda0ae, type: 3}
+  m_Name: LevelConfig_L6
+  m_EditorClassIdentifier: Assembly-CSharp::LevelConfig
+  _id: 6
+  _displayName: Ущелье
+  _levelPrefab: {fileID: 0}
+  _startingGold: 260
+  _baseHealth: 18
+  _availableTowers:
+  - {fileID: 11400000, guid: 7af87421651616149a56f835556710f1, type: 2}
+  - {fileID: 11400000, guid: 2cc99cee2ee7fe349921f35390d70e47, type: 2}
+  - {fileID: 11400000, guid: 4a0f6192c7db24e40aae1e304e4c6793, type: 2}
+  - {fileID: 11400000, guid: d019c8ede249f7b43a250a80e1033b5b, type: 2}
+  _waves:
+  - {fileID: 11400000, guid: bdce4dfac5fd4fa4a48dab1cb274110b, type: 2}
+  - {fileID: 11400000, guid: f98ff37898e14611a6a8e8abfa385200, type: 2}
+  - {fileID: 11400000, guid: 603c5456475a408a93920278e8345566, type: 2}
+  - {fileID: 11400000, guid: 8a071b0fea65439d866be480c151709a, type: 2}
+  - {fileID: 11400000, guid: 89133de12f944813a2f6b9b5b47fa36f, type: 2}
+  - {fileID: 11400000, guid: 70f95c1c77ed480eb6640cfa88609b67, type: 2}
+  - {fileID: 11400000, guid: 4cf71a5fba174f3c8802b3e7f2abddb8, type: 2}
+  - {fileID: 11400000, guid: af142eacb6a247b1bdada7c13c959606, type: 2}

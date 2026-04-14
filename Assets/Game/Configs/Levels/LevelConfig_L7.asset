@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c2248cc49f5f547814a57cd3eda0ae, type: 3}
+  m_Name: LevelConfig_L7
+  m_EditorClassIdentifier: Assembly-CSharp::LevelConfig
+  _id: 7
+  _displayName: Лабиринт
+  _levelPrefab: {fileID: 0}
+  _startingGold: 270
+  _baseHealth: 16
+  _availableTowers:
+  - {fileID: 11400000, guid: 7af87421651616149a56f835556710f1, type: 2}
+  - {fileID: 11400000, guid: 2cc99cee2ee7fe349921f35390d70e47, type: 2}
+  - {fileID: 11400000, guid: 4a0f6192c7db24e40aae1e304e4c6793, type: 2}
+  - {fileID: 11400000, guid: d019c8ede249f7b43a250a80e1033b5b, type: 2}
+  _waves:
+  - {fileID: 11400000, guid: be081737625a45e0a0a178c862a5e8a1, type: 2}
+  - {fileID: 11400000, guid: e2bf06e92ff441a082f35f2d3dd62a82, type: 2}
+  - {fileID: 11400000, guid: fb97d054fe3b46f7a0f919119d4fbc9d, type: 2}
+  - {fileID: 11400000, guid: 937171d54b4e467ab80565905dad56d7, type: 2}
+  - {fileID: 11400000, guid: cc825c5eeb504d1784a53fec8000ca4d, type: 2}
+  - {fileID: 11400000, guid: 4f1280f43b584ceca200dc75dce175ea, type: 2}
+  - {fileID: 11400000, guid: 0c5b6f0728b945ee9f42c01c22ffebcc, type: 2}
+  - {fileID: 11400000, guid: 61521390f6a3451282a62f7c682fd6a8, type: 2}
