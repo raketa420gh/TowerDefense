@@ -15,7 +15,7 @@ MonoBehaviour:
   _id: 4
   _displayName: "\u0423\u0449\u0435\u043B\u044C\u0435"
   _levelPrefab: {fileID: 0}
-  _startingGold: 400
+  _startingGold: 800
   _baseHealth: 15
   _waves:
   - {fileID: 11400000, guid: 9fe9f5f5d9015b5499439589a6587710, type: 2}

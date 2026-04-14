@@ -47,10 +47,6 @@ public class MainMenuPresenter : IInitializable, IDisposable
         _mainMenu.Show();
     }
 
-    private void OnLevelSelected(int levelId)
-    {
-        if (levelId > _progress.UnlockedLevel)
-            return;
+    private void OnLevelSelected(int levelId) =>
         _signalBus.Fire(new LevelStartRequestedSignal { LevelId = levelId });
-    }
 }
