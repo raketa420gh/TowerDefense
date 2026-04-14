@@ -33,3 +33,83 @@ MonoBehaviour:
     DisplayName: Финал
     SceneName: Gameplay_L5
     Config: {fileID: 11400000, guid: d397d89a218a94840a2663d65cd78fc0, type: 2}
+  - Id: 6
+    DisplayName: Ущелье
+    SceneName: Gameplay_L3
+    Config: {fileID: 11400000, guid: fb073ff2247a40bea983f6ef3c9a7164, type: 2}
+  - Id: 7
+    DisplayName: Лабиринт
+    SceneName: Gameplay_L3
+    Config: {fileID: 11400000, guid: 661b2ff493794fa0a742b713f6970d06, type: 2}
+  - Id: 8
+    DisplayName: Вихрь
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: 6f40d84cea3749a1a6c2a605a3a60528, type: 2}
+  - Id: 9
+    DisplayName: Осада
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: fa345b59045447048c4fcf593527b07b, type: 2}
+  - Id: 10
+    DisplayName: Клыки
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: 34ecd55778ca4998bb3ba0873bf2753d, type: 2}
+  - Id: 11
+    DisplayName: Нашествие
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: aeb1d5968c80421ba7ee053b1dd2a4fb, type: 2}
+  - Id: 12
+    DisplayName: Таран
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: 05a47b02926b454087b014d31c363edf, type: 2}
+  - Id: 13
+    DisplayName: Двойной удар
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: 8efd77e4da874c3eafef4590c618967c, type: 2}
+  - Id: 14
+    DisplayName: Ловушка
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: 8ae62f4a129f41a28a48db84761f26b3, type: 2}
+  - Id: 15
+    DisplayName: Падший
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: 96344410ed7d4bfd97006fb3b49c2a7d, type: 2}
+  - Id: 16
+    DisplayName: Легион
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: ea22396abe244320a3c3d161acba0e4d, type: 2}
+  - Id: 17
+    DisplayName: Рой
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: c42b1c199abf4b7b89ae332b32b141dd, type: 2}
+  - Id: 18
+    DisplayName: Броня
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: 0d6e7cb405b94b068feceb1b3a9a6a75, type: 2}
+  - Id: 19
+    DisplayName: Трёхпутье
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: 591aa35d95584814b1bb21e4708746db, type: 2}
+  - Id: 20
+    DisplayName: Командир
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: 7ef2756958fa458b87ef53c7034eaf36, type: 2}
+  - Id: 21
+    DisplayName: Элита
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: c54441f2a8d54577b637bc845f9d1aa7, type: 2}
+  - Id: 22
+    DisplayName: Прорыв
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: f089974cc2f54f8487536ac0d587c4f2, type: 2}
+  - Id: 23
+    DisplayName: Шторм
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: a48e08656763488d8b9b2bc3111a9592, type: 2}
+  - Id: 24
+    DisplayName: Апокалипсис
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: 05e1a661752d4a7b958b8b30cee543e1, type: 2}
+  - Id: 25
+    DisplayName: Финал (Boss Rush)
+    SceneName: Gameplay_L4
+    Config: {fileID: 11400000, guid: d2cc3d6777114fc49fe0125035c2a895, type: 2}

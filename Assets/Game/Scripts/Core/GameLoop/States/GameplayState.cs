@@ -6,17 +6,20 @@ public class GameplayState : GameLoopState
     private readonly DiContainer _container;
     private readonly SignalBus _signalBus;
     private readonly SceneLoader _sceneLoader;
+    private readonly LevelCatalog _catalog;
 
     private PausePresenter _pausePresenter;
+    private int _pendingLevelId;
     private int _lastLevelId;
     private bool _gameEnded;
 
     public GameplayState(GameLoopStateMachine stateMachine, DiContainer container,
-        SignalBus signalBus, SceneLoader sceneLoader) : base(stateMachine)
+        SignalBus signalBus, SceneLoader sceneLoader, LevelCatalog catalog) : base(stateMachine)
     {
         _container = container;
         _signalBus = signalBus;
         _sceneLoader = sceneLoader;
+        _catalog = catalog;
     }
 
     public override void OnStateRegistered()
@@ -24,6 +27,7 @@ public class GameplayState : GameLoopState
         _signalBus.Subscribe<BaseDestroyedSignal>(OnBaseDestroyed);
         _signalBus.Subscribe<AllWavesCompletedSignal>(OnAllWavesCompleted);
         _signalBus.Subscribe<EnemyReachedBaseSignal>(OnEnemyReachedBase);
+        _signalBus.Subscribe<LevelLoadedSignal>(sig => _pendingLevelId = sig.LevelId);
     }
 
     public override void OnStateActivated()
@@ -37,6 +41,14 @@ public class GameplayState : GameLoopState
         {
             Debug.LogError("[GameplayState] LevelContext not found in scene");
             return;
+        }
+
+        // Inject correct config for levels that share a scene layout
+        if (_pendingLevelId > 0)
+        {
+            var def = _catalog.Get(_pendingLevelId);
+            if (def?.Config != null)
+                levelContext.SetConfig(def.Config);
         }
 
         var sceneContext = Object.FindFirstObjectByType<SceneContext>();

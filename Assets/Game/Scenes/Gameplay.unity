@@ -2070,6 +2070,10 @@ PrefabInstance:
       propertyPath: m_BlockingMask.m_Bits
       value: 311
       objectReference: {fileID: 0}
+    - target: {fileID: 526483314537771917, guid: 4dd2b3e32ae970c429a21e4bba3c0bb3, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 311
+      objectReference: {fileID: 0}
     - target: {fileID: 620552160509046675, guid: 4dd2b3e32ae970c429a21e4bba3c0bb3, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0

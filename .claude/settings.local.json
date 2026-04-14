@@ -21,7 +21,18 @@
       "Bash(find D:\\\\Game Development\\\\TowerDefense\\\\Assets\\\\Game:*)",
       "mcp__UnityMCP__manage_camera",
       "mcp__UnityMCP__execute_menu_item",
-      "Bash(git -C \"D:\\\\Game Development\\\\TowerDefense\" show HEAD:Assets/Game/Scripts/EntryPoint.cs)"
+      "Bash(git -C \"D:\\\\Game Development\\\\TowerDefense\" show HEAD:Assets/Game/Scripts/EntryPoint.cs)",
+      "Bash(grep \"guid: efeff2b4608c3f64587d60eab677639d\" \"D:\\\\Game Development\\\\TowerDefense/Assets/Game/Content/kenney_tower-defense-kit/Models/FBX format\"/*.fbx.meta)",
+      "Bash(grep \"guid: 1f9c1eb1910343f41ac809b2fc35488b\" \"D:\\\\Game Development\\\\TowerDefense/Assets/Game/Content/kenney_tower-defense-kit/Models/FBX format\"/*.fbx.meta)",
+      "Bash(grep \"guid: 9f963476201fe7046808e02f80546986\" \"D:\\\\Game Development\\\\TowerDefense/Assets/Game/Content/kenney_tower-defense-kit/Models/FBX format\"/*.fbx.meta)",
+      "Bash(python gen_level_assets.py)",
+      "Bash(py --version)",
+      "Bash(/c/Users/raketa/AppData/Local/Microsoft/WindowsApps/python3 \"D:/Game Development/TowerDefense/gen_level_assets.py\")",
+      "Bash(/c/Users/raketa/AppData/Local/uv/cache/archive-v0/13YgMumFv6w3n9vRzq3Rl/Scripts/python.exe 'D:/Game Development/TowerDefense/gen_level_assets.py')",
+      "mcp__ide__getDiagnostics",
+      "Bash(grep -l \"_availableTowers\" \"D:/Game Development/TowerDefense/Assets/Game/Configs/Levels/\"*.asset)",
+      "Bash(grep:*)",
+      "Bash(wc:*)"
     ]
   }
 }

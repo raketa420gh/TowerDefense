@@ -17,6 +17,11 @@ MonoBehaviour:
   _levelPrefab: {fileID: 0}
   _startingGold: 900
   _baseHealth: 12
+  _availableTowers:
+  - {fileID: 11400000, guid: 7af87421651616149a56f835556710f1, type: 2}
+  - {fileID: 11400000, guid: 2cc99cee2ee7fe349921f35390d70e47, type: 2}
+  - {fileID: 11400000, guid: 4a0f6192c7db24e40aae1e304e4c6793, type: 2}
+  - {fileID: 11400000, guid: d019c8ede249f7b43a250a80e1033b5b, type: 2}
   _waves:
   - {fileID: 11400000, guid: a17e0a13de7ac014aba48a58b4427b9c, type: 2}
   - {fileID: 11400000, guid: 0cd2e3b9064b5034184fc5ef5f70906f, type: 2}
