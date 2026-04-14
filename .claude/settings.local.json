@@ -20,7 +20,8 @@
       "Bash(find D:\\\\Game Development\\\\TowerDefense\\\\Assets\\\\Game\\\\Scripts:*)",
       "Bash(find D:\\\\Game Development\\\\TowerDefense\\\\Assets\\\\Game:*)",
       "mcp__UnityMCP__manage_camera",
-      "mcp__UnityMCP__execute_menu_item"
+      "mcp__UnityMCP__execute_menu_item",
+      "Bash(git -C \"D:\\\\Game Development\\\\TowerDefense\" show HEAD:Assets/Game/Scripts/EntryPoint.cs)"
     ]
   }
 }
