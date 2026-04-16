@@ -9,14 +9,18 @@ namespace MagicStaff.MainMenu
         MainMenuView _menuView;
         [SerializeField]
         StaffModificationView _staffView;
+        [SerializeField]
+        PartPickerView _pickerView;
 
         public override void InstallBindings()
         {
             Container.BindInstance(_menuView);
             Container.BindInstance(_staffView);
+            Container.BindInstance(_pickerView);
 
             Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
             Container.BindInterfacesAndSelfTo<MainMenuController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<StaffModificationController>().AsSingle().NonLazy();
         }
     }
 }

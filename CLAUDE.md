@@ -21,3 +21,4 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - SOLID, OOP, GRASP, KISS
 - All toggleable Views must inherit from `DisplayableView` (`Show()` / `Hide()` methods)
 - Never use `FindObjectsOfType`, `FindObjectOfType`, `FindObjectsByType`, `GameObject.Find`, `GameObject.FindWithTag` or any other scene-search Unity APIs — use dependency injection, serialized references, or service locator instead
+- ScriptableObject naming: avoid `SO` suffix — use `Config` instead (e.g. `EnemyConfig`, not `EnemySO`)

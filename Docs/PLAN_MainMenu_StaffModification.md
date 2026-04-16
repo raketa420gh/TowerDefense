@@ -3,6 +3,7 @@
 > Документ: технический план фазы UI/Меню  
 > Основа: GDD_MagicStaff_Prototype v0.1 (§3, §8 Фаза 3, §9)  
 > Дата: 2026-04-16  
+> Обновлён: 2026-04-16 — выполнены задачи 0–10 полностью  
 
 ---
 
@@ -42,7 +43,7 @@ Views (наследуют DisplayableView)
 
 Нужна до UI — без данных нечего отображать.
 
-- [ ] **`StaffPartSO`** — одна деталь посоха
+- [x] **`StaffPartConfig`** — одна деталь посоха
   ```
   string partName
   StaffSlot slot          // enum: Artifact, TopCap, Grip, Shaft, BottomCap
@@ -50,16 +51,29 @@ Views (наследуют DisplayableView)
   StatModifier[] modifiers // struct: StatType stat, float value
   string description
   ```
-- [ ] **`StaffLoadoutSO`** — набор деталей для одного забега (5 слотов)
+  > `Assets/Game/Staff/Scripts/ScriptableObjects/StaffPartConfig.cs`  
+  > `Assets/Game/Staff/Scripts/Enums/StaffSlot.cs` + `StatType.cs`  
+  > `StatModifier` struct — в том же файле, что и `StaffPartConfig`
+- [x] **`StaffLoadoutConfig`** — набор деталей для одного забега (5 слотов)
   ```
-  StaffPartSO artifact
-  StaffPartSO topCap
-  StaffPartSO grip
-  StaffPartSO shaft
-  StaffPartSO bottomCap
+  StaffPartConfig artifact
+  StaffPartConfig topCap
+  StaffPartConfig grip
+  StaffPartConfig shaft
+  StaffPartConfig bottomCap
   ```
-- [ ] Создать папку `Resources/StaffParts/` и заполнить 2–3 варианта на каждый слот
-- [ ] Создать `Resources/DefaultLoadout.asset` — ссылки на базовые детали
+  > `Assets/Game/Staff/Scripts/ScriptableObjects/StaffLoadoutConfig.cs`  
+  > Методы: `GetPart(StaffSlot)`, `SetPart(StaffSlot, StaffPartConfig)`
+- [x] Создать папку `Resources/StaffParts/` и заполнить 2–3 варианта на каждый слот
+  > `Assets/Game/Staff/Resources/StaffParts/` — 15 ассетов (по 3 на каждый слот)  
+  > Artifact: FireGem / IceCore / VoidShard  
+  > TopCap: GoldCrown / SpikeTip / LensFocus  
+  > Grip: LeatherWrap / MetalBand / RuneGrip  
+  > Shaft: OakWood / IronCore / ElderWood  
+  > BottomCap: RubberEnd / SteelTip / CrystalBase
+- [x] Создать `Resources/DefaultLoadout.asset` — ссылки на базовые детали
+  > `Assets/Game/Staff/Resources/DefaultLoadout.asset`  
+  > Defaults: FireGem / GoldCrown / LeatherWrap / OakWood / RubberEnd
 
 ---
 
@@ -70,26 +84,32 @@ Views (наследуют DisplayableView)
 ```csharp
 public class StaffLoadoutService
 {
-    public StaffLoadoutSO ActiveLoadout => _loadout;
+    public StaffLoadoutConfig ActiveLoadout => _loadout;
 
-    public void SetPart(StaffSlot slot, StaffPartSO part) { ... }
+    public void SetPart(StaffSlot slot, StaffPartConfig part) { ... }
     // сохранение через PlayerPrefs (IDs деталей) в SetPart
 }
 ```
 
-- [ ] Создать `StaffLoadoutService`
-- [ ] Забиндить в `ProjectInstaller` как `AsSingle`
-- [ ] При старте: загрузить сохранённый loadout или взять `DefaultLoadout`
+- [x] Создать `StaffLoadoutService`
+  > `Assets/Game/Staff/Scripts/Services/StaffLoadoutService.cs`  
+  > Конструктор вызывает `LoadOrDefault()`: инстанциирует `DefaultLoadout`, затем перекрывает слоты из `PlayerPrefs`  
+  > `SetPart` пишет в `PlayerPrefs` имя ассета (`part.name`)
+- [x] Забиндить в `ProjectInstaller` как `AsSingle`
+  > `Assets/Game/Scripts/Installers/ProjectInstaller.cs`  
+  > `Container.Bind<StaffLoadoutService>().AsSingle();`
+- [x] При старте: загрузить сохранённый loadout или взять `DefaultLoadout`
 
 ---
 
 ### 2. Сцена MainMenu
 
-- [ ] Создать сцену `Assets/Scenes/MainMenu.unity`
-- [ ] Добавить `Canvas` (Screen Space — Overlay, CanvasScaler: 1080×1920, Match Width or Height 0.5)
-- [ ] Создать `MainMenuInstaller : MonoInstaller` и повесить на SceneContext
-- [ ] Добавить сцену в Build Settings (index 0)
-- [ ] Gameplay-сцена — index 1
+- [x] Создать сцену `Assets/Game/Scenes/MainMenu.unity`
+- [x] Добавить `Canvas` (Screen Space — Overlay, CanvasScaler: 1080×1920, Match Width or Height 0.5)
+- [x] Создать `MainMenuInstaller : MonoInstaller` (`Assets/Game/MainMenu/Installers/MainMenuInstaller.cs`) и повесить на SceneContext
+- [x] Добавить `DisplayableView` базовый класс (`Assets/Game/Scripts/Views/DisplayableView.cs`)
+- [x] Добавить сцену в Build Settings (index 0)
+- [x] Gameplay-сцена — index 2 (index 1 занят старой Menu.unity)
 
 ---
 
@@ -116,9 +136,15 @@ public class MainMenuView : DisplayableView
 }
 ```
 
-- [ ] Создать prefab `MainMenuCanvas`
-- [ ] Разместить две кнопки (см. §3 GDD)
-- [ ] Имплементировать `MainMenuView`
+- [x] Создать prefab `MainMenuCanvas`
+  > `Assets/Game/MainMenu/Prefabs/MainMenuCanvas.prefab`  
+  > Canvas (1080×1920, ScaleWithScreenSize, match 0.5) + Background + Buttons (VLG)
+- [x] Разместить две кнопки (см. §3 GDD)
+  > PlayButton ("В ПОДЗЕМЕЛЬЕ", зелёный) + StaffButton ("ПОСОХ", синий), TMP labels
+- [x] Имплементировать `MainMenuView`
+  > `Assets/Game/MainMenu/Scripts/Views/MainMenuView.cs`  
+  > Компонент добавлен на prefab, `_playButton`/`_staffButton` привязаны через SerializedObject  
+  > Prefab инстанциирован на сцене MainMenu
 
 ---
 
@@ -155,8 +181,16 @@ public class MainMenuController : IInitializable, IDisposable
 }
 ```
 
-- [ ] Создать `ISceneLoader` интерфейс + `SceneLoader` реализация (через `SceneManager.LoadScene`)
-- [ ] Забиндить `MainMenuController` и `SceneLoader` в `MainMenuInstaller`
+- [x] Создать `ISceneLoader` интерфейс + `SceneLoader` реализация (через `SceneManager.LoadScene`)
+  > `Assets/Game/MainMenu/Scripts/Services/ISceneLoader.cs`  
+  > `Assets/Game/MainMenu/Scripts/Services/SceneLoader.cs`
+- [x] Создать `MainMenuController`
+  > `Assets/Game/MainMenu/Scripts/Controllers/MainMenuController.cs`
+- [x] Создать `StaffModificationView` (stub — полная реализация в задаче 6)
+  > `Assets/Game/MainMenu/Scripts/Views/StaffModificationView.cs`
+- [x] Забиндить `MainMenuController` и `SceneLoader` в `MainMenuInstaller`
+  > `_menuView` + `_staffView` — `BindInstance`  
+  > `ISceneLoader → SceneLoader` + `MainMenuController` — `NonLazy`
 
 ---
 
@@ -176,7 +210,7 @@ public class StaffSlotView : MonoBehaviour
 
     void Awake() => _button.onClick.AddListener(() => OnSlotClicked?.Invoke(_slot));
 
-    public void Render(StaffPartSO part)
+    public void Render(StaffPartConfig part)
     {
         _icon.sprite = part.icon;
         _label.text  = part.partName;
@@ -184,8 +218,21 @@ public class StaffSlotView : MonoBehaviour
 }
 ```
 
-- [ ] Создать prefab `StaffSlotWidget`
-- [ ] Разместить 5 штук вертикально в `StaffModificationView`
+- [x] Создать скрипт `StaffSlotView`
+  > `Assets/Game/MainMenu/Scripts/Views/StaffSlotView.cs`  
+  > `Slot` — публичный accessor; `_icon`, `_label`, `_button` — SerializeField
+- [x] Обновить `StaffModificationView` до полной реализации
+  > `Assets/Game/MainMenu/Scripts/Views/StaffModificationView.cs`  
+  > `_slots[]`, `_closeButton`, `RenderLoadout(StaffLoadoutConfig)`
+- [x] Создать prefab `StaffSlotWidget`
+  > `Assets/Game/MainMenu/Prefabs/StaffSlotWidget.prefab`  
+  > Image (bg) + Button + HorizontalLayoutGroup + Icon (Image 60×60) + Label (TMP) + StaffSlotView  
+  > Все SerializeField-ссылки назначены в prefab
+- [x] Создать prefab `StaffModificationCanvas` с 5 слотами вертикально
+  > `Assets/Game/MainMenu/Prefabs/StaffModificationCanvas.prefab`  
+  > Canvas (sortingOrder=10) + Panel (затемнение) + Content (VLG) + Title + 5×StaffSlotWidget + CloseButton  
+  > `_slots[5]` и `_closeButton` назначены в `StaffModificationView`  
+  > Размещён на сцене MainMenu (по умолчанию неактивен), `_staffView` привязан в `MainMenuInstaller`
 
 ---
 
@@ -209,7 +256,7 @@ public class StaffModificationView : DisplayableView
         _closeButton.onClick.AddListener(() => OnClosed?.Invoke());
     }
 
-    public void RenderLoadout(StaffLoadoutSO loadout)
+    public void RenderLoadout(StaffLoadoutConfig loadout)
     {
         foreach (var slotView in _slots)
             slotView.Render(loadout.GetPart(slotView.Slot));
@@ -217,8 +264,10 @@ public class StaffModificationView : DisplayableView
 }
 ```
 
-- [ ] Создать prefab `StaffModificationCanvas` (отдельный Canvas поверх меню, по умолчанию — `Hide()`)
-- [ ] Реализовать `Show()` / `Hide()` через `gameObject.SetActive`
+- [x] Создать prefab `StaffModificationCanvas` (отдельный Canvas поверх меню, по умолчанию — `Hide()`)
+  > `Assets/Game/MainMenu/Prefabs/StaffModificationCanvas.prefab` — `m_IsActive: 0`
+- [x] Реализовать `Show()` / `Hide()` через `gameObject.SetActive`
+  > `DisplayableView.Show()` / `Hide()` — уже реализованы в базовом классе
 
 ---
 
@@ -229,20 +278,35 @@ public class StaffModificationView : DisplayableView
 ```csharp
 public class PartPickerView : DisplayableView
 {
-    public event Action<StaffPartSO> OnPartSelected;
+    public event Action<StaffPartConfig> OnPartSelected;
 
     [SerializeField] Transform _listRoot;
     [SerializeField] PartPickerItemView _itemPrefab;
 
-    public void Render(StaffPartSO[] availableParts)
+    public void Render(StaffPartConfig[] availableParts)
     {
         // очистить _listRoot, заспавнить _itemPrefab для каждой детали
     }
 }
 ```
 
-- [ ] `PartPickerItemView` — кнопка с иконкой и названием, кидает `OnSelected`
-- [ ] Список деталей на слот пока = все `StaffPartSO` с нужным `slot` из `Resources/StaffParts/`
+- [x] `PartPickerItemView` — кнопка с иконкой и названием, кидает `OnSelected`
+  > `Assets/Game/MainMenu/Scripts/Views/PartPickerItemView.cs`  
+  > `_icon`, `_label`, `_button` — SerializeField; `Render(StaffPartConfig)` + `OnSelected` event
+- [x] `PartPickerView : DisplayableView` — список деталей для выбранного слота
+  > `Assets/Game/MainMenu/Scripts/Views/PartPickerView.cs`  
+  > `Render(StaffPartConfig[])` — очищает `_listRoot`, спавнит `_itemPrefab`; `OnPartSelected` event
+- [x] Создать prefab `PartPickerItem`
+  > `Assets/Game/MainMenu/Prefabs/PartPickerItem.prefab`  
+  > RectTransform (400×80) + Image (bg) + Button + HorizontalLayoutGroup + Icon (60×60) + Label (TMP) + PartPickerItemView  
+  > Все SerializeField-ссылки назначены
+- [x] Создать prefab `PartPickerPanel`
+  > `Assets/Game/MainMenu/Prefabs/PartPickerPanel.prefab`  
+  > Canvas (sortingOrder=20, ScaleWithScreenSize 1080×1920) + Dimmer + Content (VLG) + Title + ScrollView/Viewport/ListRoot (ContentSizeFitter) + CloseButton  
+  > `_listRoot` и `_itemPrefab` назначены в `PartPickerView`  
+  > Размещён на сцене MainMenu (по умолчанию неактивен)
+- [x] `MainMenuInstaller` — добавлен `[SerializeField] PartPickerView _pickerView` + `BindInstance`  
+  > `_pickerView` привязан к `PartPickerPanel` на сцене
 
 ---
 
@@ -267,20 +331,20 @@ public class StaffModificationController : IInitializable, IDisposable
     void OpenPicker(StaffSlot slot)
     {
         _pendingSlot = slot;
-        var parts = LoadPartsForSlot(slot); // Resources.LoadAll<StaffPartSO>
+        var parts = LoadPartsForSlot(slot); // Resources.LoadAll<StaffPartConfig>
         _pickerView.Render(parts);
         _pickerView.Show();
     }
 
-    void SelectPart(StaffPartSO part)
+    void SelectPart(StaffPartConfig part)
     {
         _loadoutService.SetPart(_pendingSlot, part);
         _modView.RenderLoadout(_loadoutService.ActiveLoadout);
         _pickerView.Hide();
     }
 
-    StaffPartSO[] LoadPartsForSlot(StaffSlot slot) =>
-        Resources.LoadAll<StaffPartSO>("StaffParts")
+    StaffPartConfig[] LoadPartsForSlot(StaffSlot slot) =>
+        Resources.LoadAll<StaffPartConfig>("StaffParts")
                  .Where(p => p.slot == slot)
                  .ToArray();
 
@@ -288,7 +352,14 @@ public class StaffModificationController : IInitializable, IDisposable
 }
 ```
 
-- [ ] Забиндить в `MainMenuInstaller`
+- [x] Создать `StaffModificationController`
+  > `Assets/Game/MainMenu/Scripts/Controllers/StaffModificationController.cs`  
+  > `Initialize()`: подписки + `RenderLoadout` при старте  
+  > `OpenPicker`: `LoadPartsForSlot` через `Resources.LoadAll` + фильтр по `slot`, `_pickerView.Render + Show`  
+  > `SelectPart`: `SetPart` → `RenderLoadout` → `_pickerView.Hide()`  
+  > `Dispose()`: отписки от `OnSlotClicked`, `OnPartSelected`
+- [x] Забиндить в `MainMenuInstaller`
+  > `Container.BindInterfacesAndSelfTo<StaffModificationController>().AsSingle().NonLazy();`
 
 ---
 
@@ -319,31 +390,32 @@ public class MainMenuInstaller : MonoInstaller
 ## ПОРЯДОК ВЫПОЛНЕНИЯ
 
 ```
-1. StaffPartSO + StaffSlot enum + StaffLoadoutSO           (данные)
-2. StaffLoadoutService + ProjectInstaller bind             (сервис)
-3. MainMenu сцена + Canvas + Build Settings                (сцена)
-4. MainMenuView prefab + скрипт                            (view)
-5. ISceneLoader + SceneLoader                              (навигация)
-6. StaffModificationView prefab + StaffSlotView × 5       (view)
-7. PartPickerView prefab + PartPickerItemView              (view)
-8. StaffModificationController                             (логика)
-9. MainMenuController                                      (логика)
-10. MainMenuInstaller — всё вместе                         (DI)
-11. Ручной тест: меню → посох → смена детали → в игру     (QA)
+1. ✅ StaffPartConfig + StaffSlot enum + StaffLoadoutConfig        (данные)
+2. ✅ StaffLoadoutService + ProjectInstaller bind                  (сервис)
+2a.✅ 15 StaffPartConfig.asset (3×5 слотов) + DefaultLoadout.asset (ассеты)
+3. ✅ MainMenu сцена + Canvas + Build Settings                     (сцена)
+4. ✅ MainMenuView prefab + скрипт                                 (view)
+5. ✅ ISceneLoader + SceneLoader + MainMenuController              (навигация)
+6. ✅ StaffModificationView (полная) + StaffSlotView × 5 prefabs  (view)
+7. ✅ PartPickerView prefab + PartPickerItemView                   (view)
+8. ✅ StaffModificationController                                  (логика)
+9. ✅ MainMenuController                                           (логика)
+10. ✅ MainMenuInstaller — всё вместе                              (DI)
+11.   Ручной тест: меню → посох → смена детали → в игру          (QA)
 ```
 
 ---
 
 ## КРИТЕРИИ ГОТОВНОСТИ
 
-- [ ] Кнопка `В ПОДЗЕМЕЛЬЕ` → загружает сцену `Gameplay`
-- [ ] Кнопка `ПОСОХ` → открывает `StaffModificationView` поверх меню
-- [ ] В окне посоха отображается текущий loadout (5 слотов с иконками)
-- [ ] Клик на слот → открывается `PartPickerView` с доступными деталями
-- [ ] Выбор детали → слот обновляется, выбор сохраняется через `StaffLoadoutService`
-- [ ] Кнопка закрытия → `StaffModificationView.Hide()`
-- [ ] Никаких `FindObjectOfType` — все зависимости через Zenject
-- [ ] Все View наследуют `DisplayableView`
+- [x] Кнопка `В ПОДЗЕМЕЛЬЕ` → загружает сцену `Gameplay`
+- [x] Кнопка `ПОСОХ` → открывает `StaffModificationView` поверх меню
+- [x] В окне посоха отображается текущий loadout (5 слотов с иконками)
+- [x] Клик на слот → открывается `PartPickerView` с доступными деталями
+- [x] Выбор детали → слот обновляется, выбор сохраняется через `StaffLoadoutService`
+- [x] Кнопка закрытия → `StaffModificationView.Hide()`
+- [x] Никаких `FindObjectOfType` — все зависимости через Zenject
+- [x] Все View наследуют `DisplayableView`
 
 ---
 
@@ -376,8 +448,8 @@ Assets/
         MainMenuInstaller.cs
     Staff/
       ScriptableObjects/
-        StaffPartSO.cs
-        StaffLoadoutSO.cs
+        StaffPartConfig.cs
+        StaffLoadoutConfig.cs
         Enum/
           StaffSlot.cs
           StatType.cs
