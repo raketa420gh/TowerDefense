@@ -5,22 +5,22 @@ using Zenject;
 public class StaffVisualBuilder : MonoBehaviour
 {
     [SerializeField]
-    Renderer _artifact;
+    private Renderer _artifact;
     [SerializeField]
-    Renderer _topCap;
+    private Renderer _topCap;
     [SerializeField]
-    Renderer _grip;
+    private Renderer _grip;
     [SerializeField]
-    Renderer _shaft;
+    private Renderer _shaft;
     [SerializeField]
-    Renderer _bottomCap;
+    private Renderer _bottomCap;
 
     [Inject]
-    StaffLoadoutService _loadout;
+    private StaffLoadoutService _loadout;
 
-    void Start() => ApplyLoadout();
+    private void Start() => ApplyLoadout();
 
-    void ApplyLoadout()
+    private void ApplyLoadout()
     {
         // Минимум: сборка работает, визуал виден
         // Расширяется в PLAN_Gameplay_Combat: маппинг слотов → цвет материала

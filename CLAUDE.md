@@ -18,6 +18,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - After `[SerializeField]` (and other attributes), next text on a new line
 - No `public Var { get; private set; }` — always `public Var => _var;` + setter method
 - Files 
+- Access modifiers must always be explicitly specified — no implicit `private` or `internal`. Every field, method, property, constant, and class member must have an explicit access modifier (`private`, `public`, `protected`, `internal`, etc.)
 - SOLID, OOP, GRASP, KISS
 - All toggleable Views must inherit from `DisplayableView` (`Show()` / `Hide()` methods)
 - Never use `FindObjectsOfType`, `FindObjectOfType`, `FindObjectsByType`, `GameObject.Find`, `GameObject.FindWithTag` or any other scene-search Unity APIs — use dependency injection, serialized references, or service locator instead

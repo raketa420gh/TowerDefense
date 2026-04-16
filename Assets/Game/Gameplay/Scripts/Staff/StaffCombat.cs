@@ -3,10 +3,13 @@ using Zenject;
 
 public class StaffCombat : MonoBehaviour
 {
-    StaffCombatConfig _config;
-    ProjectilePool    _projectilePool;
+    [SerializeField]
+    private Transform _muzzlePoint;
 
-    float _fireTimer;
+    private StaffCombatConfig _config;
+    private ProjectilePool    _projectilePool;
+
+    private float _fireTimer;
 
     [Inject]
     public void Construct(StaffCombatConfig config, ProjectilePool projectilePool)
@@ -15,7 +18,7 @@ public class StaffCombat : MonoBehaviour
         _projectilePool = projectilePool;
     }
 
-    void Update()
+    private void Update()
     {
         _fireTimer += Time.deltaTime;
         if (_fireTimer < 1f / _config.fireRate) return;
@@ -27,7 +30,7 @@ public class StaffCombat : MonoBehaviour
         Shoot(target);
     }
 
-    Transform FindClosestEnemy()
+    private Transform FindClosestEnemy()
     {
         var hits     = Physics.OverlapSphere(transform.position, _config.detectionRadius, LayerMask.GetMask("Enemy"));
         Transform closest = null;
@@ -41,15 +44,16 @@ public class StaffCombat : MonoBehaviour
         return closest;
     }
 
-    void Shoot(Transform target)
+    private void Shoot(Transform target)
     {
-        var dir        = (target.position - transform.position).normalized;
+        var spawnPos   = _muzzlePoint != null ? _muzzlePoint.position : transform.position;
+        var dir        = (target.position - spawnPos).normalized;
         var projectile = _projectilePool.Get();
-        projectile.transform.position = transform.position + Vector3.up * 0.5f;
+        projectile.transform.position = spawnPos;
         projectile.Launch(dir, _config.projectileSpeed, _config.projectileDamage);
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         if (_config == null) return;
         Gizmos.color = Color.cyan;

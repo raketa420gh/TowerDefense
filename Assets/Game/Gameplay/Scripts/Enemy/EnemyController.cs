@@ -3,13 +3,13 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField]
-    HealthComponent _health;
+    private HealthComponent _health;
 
-    EnemyConfig _config;
-    Transform   _target;
-    Rigidbody   _rb;
+    private EnemyConfig _config;
+    private Transform   _target;
+    private Rigidbody   _rb;
 
-    void Awake() => _rb = GetComponent<Rigidbody>();
+    private void Awake() => _rb = GetComponent<Rigidbody>();
 
     public void Initialize(EnemyConfig config, Transform target)
     {
@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
         _health.OnDied += ReturnToPool;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (_config == null || _target == null) return;
 
@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
             _rb.rotation = Quaternion.LookRotation(dir);
     }
 
-    void ReturnToPool()
+    private void ReturnToPool()
     {
         _health.OnDied -= ReturnToPool;
         gameObject.SetActive(false);

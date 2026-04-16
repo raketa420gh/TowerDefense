@@ -5,19 +5,19 @@ using Zenject;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    Transform _playerTarget;
+    private Transform _playerTarget;
 
-    [Inject] EnemyPool   _pool;
-    [Inject] WaveConfig  _waveConfig;
-    [Inject] EnemyConfig _enemyConfig;
+    [Inject] private EnemyPool   _pool;
+    [Inject] private WaveConfig  _waveConfig;
+    [Inject] private EnemyConfig _enemyConfig;
 
-    float _elapsedTime;
+    private float _elapsedTime;
 
-    void Update() => _elapsedTime += Time.deltaTime;
+    private void Update() => _elapsedTime += Time.deltaTime;
 
-    void Start() => StartCoroutine(SpawnLoop());
+    private void Start() => StartCoroutine(SpawnLoop());
 
-    IEnumerator SpawnLoop()
+    private IEnumerator SpawnLoop()
     {
         while (true)
         {
@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void SpawnWave(int count)
+    private void SpawnWave(int count)
     {
         for (int i = 0; i < count; i++)
         {
@@ -39,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    Vector3 GetSpawnPosition()
+    private Vector3 GetSpawnPosition()
     {
         int   side     = Random.Range(0, 4);
         float half     = _waveConfig.arenaHalfSize;

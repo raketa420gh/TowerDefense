@@ -3,26 +3,23 @@ using Zenject;
 
 public class StaffFloatingBehaviour : MonoBehaviour
 {
-    StaffCombatConfig _config;
-    Transform         _playerTransform;
+    private StaffCombatConfig _config;
 
-    Vector3 _velocity;
+    private Vector3 _localVelocity;
 
     [Inject]
-    public void Construct(StaffCombatConfig config, [Inject(Id = "PlayerTransform")] Transform playerTransform)
+    public void Construct(StaffCombatConfig config)
     {
-        _config          = config;
-        _playerTransform = playerTransform;
+        _config = config;
+        transform.localPosition = _config.staffOffset;
     }
 
-    void Update()
+    private void Update()
     {
-        var targetPos = _playerTransform.position
-                      + _playerTransform.TransformDirection(_config.staffOffset)
-                      + Vector3.up * Mathf.Sin(Time.time * _config.bobFrequency * Mathf.PI * 2f)
-                                   * _config.bobAmplitude;
+        var target = _config.staffOffset;
+        target.y += Mathf.Sin(Time.time * _config.bobFrequency * Mathf.PI * 2f) * _config.bobAmplitude;
 
-        transform.position = Vector3.SmoothDamp(
-            transform.position, targetPos, ref _velocity, _config.followSmoothTime);
+        transform.localPosition = Vector3.SmoothDamp(
+            transform.localPosition, target, ref _localVelocity, _config.followSmoothTime);
     }
 }

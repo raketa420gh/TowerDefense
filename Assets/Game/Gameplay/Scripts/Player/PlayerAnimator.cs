@@ -4,18 +4,18 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField]
-    Animator _animator;
+    private Animator _animator;
 
-    MovementComponent _movement;
-    int _isMovingHash;
+    private MovementComponent _movement;
+    private int _isMovingHash;
 
-    void Awake()
+    private void Awake()
     {
         _movement = GetComponent<MovementComponent>();
         _isMovingHash = Animator.StringToHash("isMoving");
     }
 
-    void Update()
+    private void Update()
     {
         _animator.SetBool(_isMovingHash, _movement.IsMoving);
     }

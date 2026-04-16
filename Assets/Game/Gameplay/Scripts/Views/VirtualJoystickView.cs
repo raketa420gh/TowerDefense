@@ -9,17 +9,17 @@ public class VirtualJoystickView : DisplayableView,
     public event Action<Vector2> OnInputChanged;
 
     [SerializeField]
-    RectTransform _background;
+    private RectTransform _background;
     [SerializeField]
-    RectTransform _handle;
+    private RectTransform _handle;
     [SerializeField]
-    CanvasGroup _canvasGroup;
+    private CanvasGroup _canvasGroup;
     [SerializeField]
-    float _idleAlpha = 0.25f;
+    private float _idleAlpha = 0.25f;
 
-    float _radius;
+    private float _radius;
 
-    void Awake()
+    private void Awake()
     {
         _radius = _background.sizeDelta.x * 0.5f;
         _canvasGroup.alpha = _idleAlpha;

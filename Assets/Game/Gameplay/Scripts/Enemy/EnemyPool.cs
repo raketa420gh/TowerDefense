@@ -4,14 +4,14 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     [SerializeField]
-    EnemyController _prefab;
+    private EnemyController _prefab;
 
     [SerializeField]
-    int _initialSize = 20;
+    private int _initialSize = 20;
 
-    readonly List<EnemyController> _all = new();
+    private readonly List<EnemyController> _all = new();
 
-    void Awake()
+    private void Awake()
     {
         for (int i = 0; i < _initialSize; i++)
             _all.Add(CreateInstance());
@@ -32,7 +32,7 @@ public class EnemyPool : MonoBehaviour
         return n;
     }
 
-    EnemyController CreateInstance()
+    private EnemyController CreateInstance()
     {
         var e = Instantiate(_prefab, transform);
         e.gameObject.SetActive(false);

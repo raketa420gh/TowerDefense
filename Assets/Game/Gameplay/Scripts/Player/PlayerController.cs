@@ -3,8 +3,8 @@ using Zenject;
 
 public class PlayerController : IInitializable, IDisposable
 {
-    readonly MovementComponent _movement;
-    readonly GameplayHudView   _hud;
+    private readonly MovementComponent _movement;
+    private readonly GameplayHudView   _hud;
 
     [Inject]
     public PlayerController(MovementComponent movement, GameplayHudView hud)

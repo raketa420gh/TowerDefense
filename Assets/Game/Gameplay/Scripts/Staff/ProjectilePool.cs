@@ -4,14 +4,14 @@ using UnityEngine;
 public class ProjectilePool : MonoBehaviour
 {
     [SerializeField]
-    ProjectileController _prefab;
+    private ProjectileController _prefab;
 
     [SerializeField]
-    int _initialSize = 20;
+    private int _initialSize = 20;
 
-    readonly Queue<ProjectileController> _pool = new();
+    private readonly Queue<ProjectileController> _pool = new();
 
-    void Awake()
+    private void Awake()
     {
         for (var i = 0; i < _initialSize; i++)
             CreateInstance();
@@ -30,7 +30,7 @@ public class ProjectilePool : MonoBehaviour
         _pool.Enqueue(p);
     }
 
-    ProjectileController CreateInstance()
+    private ProjectileController CreateInstance()
     {
         var p = Instantiate(_prefab, transform);
         p.SetPool(this);

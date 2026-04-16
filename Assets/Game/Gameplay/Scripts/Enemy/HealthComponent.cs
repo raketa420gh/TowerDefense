@@ -6,9 +6,9 @@ public class HealthComponent : MonoBehaviour
     public event Action OnDied;
 
     [SerializeField]
-    float _maxHp;
+    private float _maxHp;
 
-    float _current;
+    private float _current;
 
     public void Initialize(float maxHp)
     {
