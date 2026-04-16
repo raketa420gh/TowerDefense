@@ -10,6 +10,8 @@ public class MovementComponent : MonoBehaviour
 
     void Awake() => _rb = GetComponent<Rigidbody>();
 
+    public bool IsMoving => _inputDir.sqrMagnitude > 0.01f;
+
     public void SetInput(Vector2 dir) => _inputDir = dir;
 
     void FixedUpdate()
