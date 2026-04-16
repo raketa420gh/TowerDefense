@@ -1384,6 +1384,10 @@ MonoBehaviour:
   _enemySpawner: {fileID: 1357735689}
   _waveConfig: {fileID: 11400000, guid: 66af165117e96b844aa4834b345613cb, type: 2}
   _enemyConfig: {fileID: 11400000, guid: 541a2d8ee6ce73b479f227408ed7fa03, type: 2}
+  _staffFloating: {fileID: 1618307487}
+  _staffCombat: {fileID: 1618307486}
+  _projectilePool: {fileID: 1142496797}
+  _staffCombatConfig: {fileID: 11400000, guid: 611cb735fddf41947b3c0d5b0bf0043c, type: 2}
 --- !u!114 &1062690273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1520,6 +1524,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066714590}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1142496796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1142496798}
+  - component: {fileID: 1142496797}
+  m_Layer: 0
+  m_Name: ProjectilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1142496797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142496796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 756560836fa17de448741be7b5029075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectilePool
+  _prefab: {fileID: 820301333471471333, guid: adcc41f80bca9f749aa70da23156dd88, type: 3}
+  _initialSize: 20
+--- !u!4 &1142496798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142496796}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &1254550311
 Material:
   serializedVersion: 8
@@ -1783,8 +1833,7 @@ Transform:
   m_LocalPosition: {x: -0.19999999, y: 0.19999999, z: 0.000000005622966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1618307485}
+  m_Children: []
   m_Father: {fileID: 977743994}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1318950113
@@ -2436,6 +2485,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1618307485}
+  - component: {fileID: 1618307487}
+  - component: {fileID: 1618307486}
   m_Layer: 0
   m_Name: StaffVisual
   m_TagString: Untagged
@@ -2451,9 +2502,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618307484}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.74253213, y: -0, z: -0, w: 0.66981053}
-  m_LocalPosition: {x: -0.008791223, y: -0.158, z: -0.127}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalRotation: {x: 0.14778575, y: -0, z: -0, w: 0.9890194}
+  m_LocalPosition: {x: -0.431, y: -0.09148055, z: 0.70180815}
+  m_LocalScale: {x: 1.216, y: 1.2160004, z: 1.2160004}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 322387531}
@@ -2461,8 +2512,32 @@ Transform:
   - {fileID: 1818620017}
   - {fileID: 1771258965}
   - {fileID: 1066714591}
-  m_Father: {fileID: 1318950112}
-  m_LocalEulerAnglesHint: {x: 95.89499, y: 0, z: 0}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 16.997, y: 0, z: 0}
+--- !u!114 &1618307486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618307484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740bc72d7968d2a488c7e3882e9e2a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StaffCombat
+--- !u!114 &1618307487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618307484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 190fdf844ade9f749aa3cb73e06a925f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StaffFloatingBehaviour
 --- !u!1 &1771258964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2829,8 +2904,10 @@ SceneRoots:
   - {fileID: 465419161}
   - {fileID: 11869788}
   - {fileID: 1292198472}
+  - {fileID: 1618307485}
   - {fileID: 8885768154888690402}
   - {fileID: 1413937834}
   - {fileID: 1062690274}
   - {fileID: 847986465}
   - {fileID: 1357735690}
+  - {fileID: 1142496798}
