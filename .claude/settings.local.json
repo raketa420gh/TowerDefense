@@ -32,7 +32,15 @@
       "mcp__ide__getDiagnostics",
       "Bash(grep -l \"_availableTowers\" \"D:/Game Development/TowerDefense/Assets/Game/Configs/Levels/\"*.asset)",
       "Bash(grep:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "WebFetch(domain:ru.stardewvalleywiki.com)",
+      "WebFetch(domain:stardewvalleywiki.com)",
+      "Bash(gh repo *)",
+      "Bash(git push *)",
+      "Bash(git branch *)",
+      "mcp__UnityMCP__validate_script",
+      "mcp__UnityMCP__create_script",
+      "mcp__UnityMCP__manage_material"
     ]
   }
 }
