@@ -1,22 +1,27 @@
+using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public event Action<int> OnKilled;
+
     [SerializeField]
     private HealthComponent _health;
 
     private EnemyConfig _config;
     private Transform   _target;
+    private EnemyPool   _pool;
     private Rigidbody   _rb;
 
     private void Awake() => _rb = GetComponent<Rigidbody>();
 
-    public void Initialize(EnemyConfig config, Transform target)
+    public void Initialize(EnemyConfig config, Transform target, EnemyPool pool)
     {
         _config = config;
         _target = target;
+        _pool   = pool;
         _health.Initialize(config.maxHp);
-        _health.OnDied += ReturnToPool;
+        _health.OnDied += HandleDied;
     }
 
     private void FixedUpdate()
@@ -33,9 +38,10 @@ public class EnemyController : MonoBehaviour
             _rb.rotation = Quaternion.LookRotation(dir);
     }
 
-    private void ReturnToPool()
+    private void HandleDied()
     {
-        _health.OnDied -= ReturnToPool;
-        gameObject.SetActive(false);
+        _health.OnDied -= HandleDied;
+        OnKilled?.Invoke(_config.xpReward);
+        _pool.Return(this);
     }
 }

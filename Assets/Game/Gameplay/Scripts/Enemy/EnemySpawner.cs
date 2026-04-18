@@ -7,11 +7,19 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private Transform _playerTarget;
 
-    [Inject] private EnemyPool   _pool;
-    [Inject] private WaveConfig  _waveConfig;
-    [Inject] private EnemyConfig _enemyConfig;
+    private EnemyPool   _pool;
+    private WaveConfig  _waveConfig;
+    private EnemyConfig _enemyConfig;
 
     private float _elapsedTime;
+
+    [Inject]
+    public void Construct(EnemyPool pool, WaveConfig waveConfig, EnemyConfig enemyConfig)
+    {
+        _pool        = pool;
+        _waveConfig  = waveConfig;
+        _enemyConfig = enemyConfig;
+    }
 
     private void Update() => _elapsedTime += Time.deltaTime;
 
@@ -35,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
         {
             var enemy = _pool.Get();
             enemy.transform.position = GetSpawnPosition();
-            enemy.Initialize(_enemyConfig, _playerTarget);
+            enemy.Initialize(_enemyConfig, _playerTarget, _pool);
         }
     }
 
@@ -48,10 +56,10 @@ public class EnemySpawner : MonoBehaviour
 
         return side switch
         {
-            0 => new Vector3(variance,        1f,  half + offset),  // север
-            1 => new Vector3(variance,        1f, -half - offset),  // юг
-            2 => new Vector3( half + offset,  1f, variance),        // восток
-            _ => new Vector3(-half - offset,  1f, variance),        // запад
+            0 => new Vector3(variance,       1f,  half + offset),
+            1 => new Vector3(variance,       1f, -half - offset),
+            2 => new Vector3( half + offset, 1f, variance),
+            _ => new Vector3(-half - offset, 1f, variance),
         };
     }
 }

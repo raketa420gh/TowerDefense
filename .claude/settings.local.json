@@ -40,7 +40,8 @@
       "Bash(git branch *)",
       "mcp__UnityMCP__validate_script",
       "mcp__UnityMCP__create_script",
-      "mcp__UnityMCP__manage_material"
+      "mcp__UnityMCP__manage_material",
+      "Bash(git commit *)"
     ]
   }
 }

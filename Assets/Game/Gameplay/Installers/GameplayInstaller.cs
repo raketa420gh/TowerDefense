@@ -4,37 +4,49 @@ using Zenject;
 public class GameplayInstaller : MonoInstaller
 {
     [SerializeField]
-    MovementComponent _movement;
+    private MovementComponent _movement;
 
     [SerializeField]
-    GameplayHudView _hudView;
+    private GameplayHudView _hudView;
 
     [SerializeField]
-    PlayerConfig _playerConfig;
+    private PlayerConfig _playerConfig;
 
     [SerializeField]
-    EnemyPool _enemyPool;
+    private EnemyPool _enemyPool;
 
     [SerializeField]
-    EnemySpawner _enemySpawner;
+    private EnemySpawner _enemySpawner;
 
     [SerializeField]
-    WaveConfig _waveConfig;
+    private WaveConfig _waveConfig;
 
     [SerializeField]
-    EnemyConfig _enemyConfig;
+    private EnemyConfig _enemyConfig;
 
     [SerializeField]
-    StaffFloatingBehaviour _staffFloating;
+    private StaffFloatingBehaviour _staffFloating;
 
     [SerializeField]
-    StaffCombat _staffCombat;
+    private StaffCombat _staffCombat;
 
     [SerializeField]
-    ProjectilePool _projectilePool;
+    private ProjectilePool _projectilePool;
 
     [SerializeField]
-    StaffCombatConfig _staffCombatConfig;
+    private StaffCombatConfig _staffCombatConfig;
+
+    [SerializeField]
+    private ExperienceConfig _experienceConfig;
+
+    [SerializeField]
+    private UpgradeLibraryConfig _upgradeLibraryConfig;
+
+    [SerializeField]
+    private ExperienceBarView _experienceBarView;
+
+    [SerializeField]
+    private UpgradeSelectionView _upgradeSelectionView;
 
     public override void InstallBindings()
     {
@@ -54,5 +66,15 @@ public class GameplayInstaller : MonoInstaller
         Container.BindInstance(_movement.transform).WithId("PlayerTransform");
         Container.QueueForInject(_staffFloating);
         Container.QueueForInject(_staffCombat);
+
+        Container.BindInstance(_experienceConfig);
+        Container.BindInstance(_upgradeLibraryConfig);
+        Container.BindInstance(_experienceBarView);
+        Container.BindInstance(_upgradeSelectionView);
+
+        Container.BindInterfacesAndSelfTo<ExperienceService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<UpgradeService>().AsSingle().NonLazy();
+        Container.Bind<PlayerStatsService>().AsSingle();
+        Container.BindInterfacesAndSelfTo<ExperienceHudController>().AsSingle().NonLazy();
     }
 }
