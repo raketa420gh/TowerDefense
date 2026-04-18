@@ -9,6 +9,7 @@ namespace MagicStaff.Staff
         CritChance,
         CritMultiplier,
         Piercing,
-        BounceCount
+        BounceCount,
+        MoveSpeed
     }
 }

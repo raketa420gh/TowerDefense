@@ -1,3 +1,4 @@
+using MagicStaff.Staff;
 using UnityEngine;
 using Zenject;
 
@@ -6,22 +7,30 @@ public class StaffCombat : MonoBehaviour
     [SerializeField]
     private Transform _muzzlePoint;
 
-    private StaffCombatConfig _config;
-    private ProjectilePool    _projectilePool;
+    private StaffCombatConfig  _config;
+    private ProjectilePool     _projectilePool;
+    private PlayerStatsService _stats;
 
     private float _fireTimer;
 
     [Inject]
-    public void Construct(StaffCombatConfig config, ProjectilePool projectilePool)
+    public void Construct(StaffCombatConfig config, ProjectilePool projectilePool, PlayerStatsService stats)
     {
         _config         = config;
         _projectilePool = projectilePool;
+        _stats          = stats;
     }
+
+    private float EffectiveFireRate
+        => _config.fireRate * (1f + _stats.GetBonus(StatType.AttackSpeed));
+
+    private float EffectiveDamage
+        => _config.projectileDamage * (1f + _stats.GetBonus(StatType.Damage));
 
     private void Update()
     {
         _fireTimer += Time.deltaTime;
-        if (_fireTimer < 1f / _config.fireRate) return;
+        if (_fireTimer < 1f / EffectiveFireRate) return;
 
         var target = FindClosestEnemy();
         if (target == null) return;
@@ -50,7 +59,7 @@ public class StaffCombat : MonoBehaviour
         var dir        = (target.position - spawnPos).normalized;
         var projectile = _projectilePool.Get();
         projectile.transform.position = spawnPos;
-        projectile.Launch(dir, _config.projectileSpeed, _config.projectileDamage);
+        projectile.Launch(dir, _config.projectileSpeed, EffectiveDamage);
     }
 
     private void OnDrawGizmosSelected()
