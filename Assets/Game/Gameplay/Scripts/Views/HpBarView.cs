@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class HpBarView : DisplayableView
 {
     [SerializeField]
-    private Slider _slider;
+    private Image _fill;
 
-    public void SetProgress(float normalized) => _slider.value = normalized;
+    public void SetProgress(float normalized) => _fill.fillAmount = normalized;
 }

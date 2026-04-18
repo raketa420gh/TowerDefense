@@ -20,7 +20,19 @@ public class PlayerHitReceiver : MonoBehaviour
         TryDamage();
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (!other.CompareTag("Enemy")) return;
+        TryDamage();
+    }
+
     private void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.gameObject.CompareTag("Enemy")) return;
+        TryDamage();
+    }
+
+    private void OnCollisionStay(Collision collision)
     {
         if (!collision.gameObject.CompareTag("Enemy")) return;
         TryDamage();
