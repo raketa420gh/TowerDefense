@@ -1,4 +1,4 @@
-namespace MagicStaff.MainMenu
+namespace MagicStaff
 {
     public interface ISceneLoader
     {

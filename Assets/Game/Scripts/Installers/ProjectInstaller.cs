@@ -1,3 +1,4 @@
+using MagicStaff;
 using MagicStaff.Staff;
 using UnityEngine;
 using Zenject;
@@ -8,5 +9,6 @@ public class ProjectInstaller : ScriptableObjectInstaller<ProjectInstaller>
     public override void InstallBindings()
     {
         Container.Bind<StaffLoadoutService>().AsSingle();
+        Container.Bind<ICoinService>().To<CoinService>().AsSingle();
     }
 }

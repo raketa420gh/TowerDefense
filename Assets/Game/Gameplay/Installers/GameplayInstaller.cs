@@ -1,3 +1,4 @@
+using MagicStaff;
 using UnityEngine;
 using Zenject;
 
@@ -48,6 +49,15 @@ public class GameplayInstaller : MonoInstaller
     [SerializeField]
     private UpgradeSelectionView _upgradeSelectionView;
 
+    [SerializeField]
+    private HpBarView _hpBarView;
+
+    [SerializeField]
+    private DefeatView _defeatView;
+
+    [SerializeField]
+    private PlayerHitReceiver _playerHitReceiver;
+
     public override void InstallBindings()
     {
         Container.BindInstance(_playerConfig);
@@ -76,5 +86,14 @@ public class GameplayInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<UpgradeService>().AsSingle().NonLazy();
         Container.Bind<PlayerStatsService>().AsSingle();
         Container.BindInterfacesAndSelfTo<ExperienceHudController>().AsSingle().NonLazy();
+
+        Container.BindInstance(_hpBarView);
+        Container.BindInstance(_defeatView);
+        Container.QueueForInject(_playerHitReceiver);
+
+        Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerHealthService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<HpHudController>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<DefeatController>().AsSingle().NonLazy();
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using MagicStaff;
 using Zenject;
 
 namespace MagicStaff.MainMenu

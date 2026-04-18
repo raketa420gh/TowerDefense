@@ -1,6 +1,6 @@
 using UnityEngine.SceneManagement;
 
-namespace MagicStaff.MainMenu
+namespace MagicStaff
 {
     public class SceneLoader : ISceneLoader
     {
