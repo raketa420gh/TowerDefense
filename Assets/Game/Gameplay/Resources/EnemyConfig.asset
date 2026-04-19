@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: EnemyConfig
   m_EditorClassIdentifier: Assembly-CSharp::EnemyConfig
   moveSpeed: 2
-  maxHp: 3
+  maxHp: 2
   bodyRadius: 0.5
+  xpReward: 15

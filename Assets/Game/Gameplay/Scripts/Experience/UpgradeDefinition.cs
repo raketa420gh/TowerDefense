@@ -5,11 +5,12 @@ using UnityEngine;
 [Serializable]
 public sealed class UpgradeDefinition
 {
-    public string   id;
-    public string   title;
-    public string   description;
-    public Sprite   icon;
-    public StatType stat;
-    public float    value;
-    public bool     isPercent;
+    public string     id;
+    public string     title;
+    public string     description;
+    public Sprite     icon;
+    public EffectType effectType;
+    public StatType   stat;
+    public float      value;
+    public bool       isPercent;
 }

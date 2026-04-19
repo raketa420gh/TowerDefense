@@ -1,4 +1,5 @@
 using System;
+using MagicStaff.Staff;
 using UnityEngine;
 using Zenject;
 
@@ -7,17 +8,22 @@ public class PlayerHealthService : IPlayerHealthService, IInitializable
     public event Action<float> OnHpChanged;
     public event Action        OnDied;
 
-    public float MaxHp        => _config.maxHp;
+    public float MaxHp        => _config.maxHp * (1f + _stats.GetBonus(StatType.MaxHp));
     public float CurrentHp    => _currentHp;
-    public float NormalizedHp => _currentHp / _config.maxHp;
+    public float NormalizedHp => _currentHp / MaxHp;
 
-    private readonly PlayerConfig _config;
+    private PlayerConfig       _config;
+    private PlayerStatsService _stats;
     private float _currentHp;
 
     [Inject]
-    public PlayerHealthService(PlayerConfig config) => _config = config;
+    public void Construct(PlayerConfig config, PlayerStatsService stats)
+    {
+        _config = config;
+        _stats  = stats;
+    }
 
-    public void Initialize() => _currentHp = _config.maxHp;
+    public void Initialize() => _currentHp = MaxHp;
 
     public void TakeDamage(float amount)
     {
@@ -26,4 +32,13 @@ public class PlayerHealthService : IPlayerHealthService, IInitializable
         OnHpChanged?.Invoke(NormalizedHp);
         if (_currentHp <= 0f) OnDied?.Invoke();
     }
+
+    public void Heal(float amount)
+    {
+        if (_currentHp <= 0f) return;
+        _currentHp = Mathf.Min(MaxHp, _currentHp + amount);
+        OnHpChanged?.Invoke(NormalizedHp);
+    }
+
+    public void ForceNotify() => OnHpChanged?.Invoke(NormalizedHp);
 }

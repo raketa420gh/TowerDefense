@@ -55,8 +55,15 @@ public class StaffCombat : MonoBehaviour
 
     private void Shoot(Transform target)
     {
-        var spawnPos   = _muzzlePoint != null ? _muzzlePoint.position : transform.position;
-        var dir        = (target.position - spawnPos).normalized;
+        var spawnPos = _muzzlePoint != null ? _muzzlePoint.position : transform.position;
+        var dir      = (target.position - spawnPos).normalized;
+        LaunchProjectile(spawnPos, dir);
+        if (UnityEngine.Random.value < _stats.GetBonus(StatType.DoubleShot))
+            LaunchProjectile(spawnPos, dir);
+    }
+
+    private void LaunchProjectile(Vector3 spawnPos, Vector3 dir)
+    {
         var projectile = _projectilePool.Get();
         projectile.transform.position = spawnPos;
         projectile.Launch(dir, _config.projectileSpeed, EffectiveDamage);
