@@ -5,7 +5,7 @@ using Zenject;
 public class ExperienceService : IExperienceService, IInitializable, IDisposable
 {
     private ExperienceConfig _config;
-    private EnemyPool        _enemyPool;
+    private EnemyDeathBus    _deathBus;
     private int _currentXp;
     private int _currentLevel = 1;
 
@@ -18,14 +18,14 @@ public class ExperienceService : IExperienceService, IInitializable, IDisposable
     public event Action<int> OnLevelUp;
 
     [Inject]
-    public void Construct(ExperienceConfig config, EnemyPool enemyPool)
+    public void Construct(ExperienceConfig config, EnemyDeathBus deathBus)
     {
-        _config    = config;
-        _enemyPool = enemyPool;
+        _config   = config;
+        _deathBus = deathBus;
     }
 
-    public void Initialize() => _enemyPool.OnEnemyKilled += AddXp;
-    public void Dispose()    => _enemyPool.OnEnemyKilled -= AddXp;
+    public void Initialize() => _deathBus.OnEnemyKilled += AddXp;
+    public void Dispose()    => _deathBus.OnEnemyKilled -= AddXp;
 
     private void AddXp(int amount)
     {

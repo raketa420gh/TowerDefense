@@ -27,14 +27,18 @@ public class EnemySpawner : MonoBehaviour
     private float                _elapsedTime;
 
     [Inject]
-    public void Construct(WaveConfig waveConfig, IPlayerHealthService playerHealth, EnemyProjectilePool projectilePool)
+    public void Construct(WaveConfig waveConfig, IPlayerHealthService playerHealth, EnemyProjectilePool projectilePool, EnemyDeathBus deathBus)
     {
         _waveConfig     = waveConfig;
         _playerHealth   = playerHealth;
         _projectilePool = projectilePool;
 
         foreach (var e in _enemies)
+        {
+            if (e.Pool != null)
+                e.Pool.OnEnemyKilled += deathBus.Notify;
             _totalWeight += e.Weight;
+        }
     }
 
     private void Update() => _elapsedTime += Time.deltaTime;

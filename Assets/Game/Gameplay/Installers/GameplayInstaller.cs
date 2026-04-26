@@ -74,6 +74,8 @@ public class GameplayInstaller : MonoInstaller
         Container.QueueForInject(_staffFloating);
         Container.QueueForInject(_staffCombat);
 
+        Container.Bind<EnemyDeathBus>().AsSingle();
+
         Container.BindInstance(_experienceConfig);
         Container.BindInstance(_upgradeLibraryConfig);
         Container.BindInstance(_experienceBarView);
