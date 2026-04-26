@@ -15,5 +15,5 @@ MonoBehaviour:
   moveSpeed: 2.5
   maxHp: 5
   bodyRadius: 0.5
-  xpReward: 20
+  xpReward: 35
   color: {r: 1, g: 0.45, b: 0, a: 1}
