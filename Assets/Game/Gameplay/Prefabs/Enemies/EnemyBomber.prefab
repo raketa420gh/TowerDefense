@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7390291332613092679}
   - component: {fileID: 215521924469109052}
   - component: {fileID: 9181127377766600467}
+  - component: {fileID: 3692833061907197225}
   m_Layer: 9
   m_Name: EnemyBomber
   m_TagString: Enemy
@@ -194,3 +195,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   _health: {fileID: 5283034650159985070}
+--- !u!114 &3692833061907197225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3872545979478920517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b15f27ae1d28124893187913a3bf446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHitEffect
+  _flashDuration: 0.12
+  _scalePeak: 1.25
+  _scaleDuration: 0.15

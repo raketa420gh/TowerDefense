@@ -4,6 +4,7 @@ using UnityEngine;
 public class HealthComponent : MonoBehaviour
 {
     public event Action OnDied;
+    public event Action OnDamaged;
 
     [SerializeField]
     private float _maxHp;
@@ -18,7 +19,9 @@ public class HealthComponent : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        if (_current <= 0f) return;
         _current -= amount;
+        OnDamaged?.Invoke();
         if (_current <= 0f) OnDied?.Invoke();
     }
 }
