@@ -4,22 +4,25 @@ using Zenject;
 public class StaffFloatingBehaviour : MonoBehaviour
 {
     private StaffCombatConfig _config;
-
+    private Transform _parent;
     private Vector3 _localVelocity;
 
     [Inject]
     public void Construct(StaffCombatConfig config)
     {
         _config = config;
-        transform.localPosition = _config.staffOffset;
+        _parent = transform.parent;
+        transform.position = _parent.position + _config.staffOffset;
     }
 
     private void Update()
     {
-        var target = _config.staffOffset;
-        target.y += Mathf.Sin(Time.time * _config.bobFrequency * Mathf.PI * 2f) * _config.bobAmplitude;
+        var worldTarget = _parent.position + _config.staffOffset;
+        worldTarget.y += Mathf.Sin(Time.time * _config.bobFrequency * Mathf.PI * 2f) * _config.bobAmplitude;
 
-        transform.localPosition = Vector3.SmoothDamp(
-            transform.localPosition, target, ref _localVelocity, _config.followSmoothTime);
+        transform.position = Vector3.SmoothDamp(
+            transform.position, worldTarget, ref _localVelocity, _config.followSmoothTime);
+
+        transform.rotation = Quaternion.identity;
     }
 }
