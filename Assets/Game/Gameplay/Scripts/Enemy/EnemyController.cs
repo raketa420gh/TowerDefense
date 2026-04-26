@@ -8,39 +8,55 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private HealthComponent _health;
 
-    private EnemyConfig _config;
-    private Transform   _target;
-    private EnemyPool   _pool;
-    private Rigidbody   _rb;
+    private EnemyConfig       _config;
+    private EnemyPool         _pool;
+    private IEnemyBehaviour[] _behaviours;
+    private Renderer          _renderer;
 
-    private void Awake() => _rb = GetComponent<Rigidbody>();
-
-    public void Initialize(EnemyConfig config, Transform target, EnemyPool pool)
+    private void Awake()
     {
-        _config = config;
-        _target = target;
-        _pool   = pool;
-        _health.Initialize(config.maxHp);
-        _health.OnDied += HandleDied;
+        _behaviours = GetComponents<IEnemyBehaviour>();
+        _renderer   = GetComponentInChildren<Renderer>();
+        if (_renderer != null) _ = _renderer.material; // pre-create instanced material
     }
 
-    private void FixedUpdate()
+    public void Initialize(EnemyConfig config, Transform target, EnemyPool pool,
+                           IPlayerHealthService playerHealth, EnemyProjectilePool projectilePool = null)
     {
-        if (_config == null || _target == null) return;
+        _config = config;
+        _pool   = pool;
 
-        var dir = (_target.position - _rb.position);
-        dir.y = 0f;
-        dir.Normalize();
+        _health.OnDied -= HandleDied;
+        _health.Initialize(config.maxHp);
+        _health.OnDied += HandleDied;
 
-        _rb.MovePosition(_rb.position + dir * _config.moveSpeed * Time.fixedDeltaTime);
+        var ctx = new EnemyBehaviourContext
+        {
+            Config         = config,
+            Target         = target,
+            Rb             = GetComponent<Rigidbody>(),
+            OwnerPool      = pool,
+            PlayerHealth   = playerHealth,
+            ProjectilePool = projectilePool
+        };
 
-        if (dir.sqrMagnitude > 0.01f)
-            _rb.rotation = Quaternion.LookRotation(dir);
+        foreach (var b in _behaviours)
+            b.Initialize(ctx);
+
+        foreach (var b in _behaviours)
+            b.OnActivated();
+
+        if (_renderer != null)
+            _renderer.material.color = config.color;
     }
 
     private void HandleDied()
     {
         _health.OnDied -= HandleDied;
+
+        foreach (var b in _behaviours)
+            b.OnDeactivated();
+
         OnKilled?.Invoke(_config.xpReward);
         _pool.Return(this);
     }

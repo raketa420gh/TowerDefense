@@ -1,24 +1,40 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Zenject;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Serializable]
+    public struct EnemySpawnEntry
+    {
+        public EnemyPool   Pool;
+        public EnemyConfig Config;
+        [Range(0f, 1f)]
+        public float       Weight;
+    }
+
     [SerializeField]
     private Transform _playerTarget;
 
-    private EnemyPool   _pool;
-    private WaveConfig  _waveConfig;
-    private EnemyConfig _enemyConfig;
+    [SerializeField]
+    private EnemySpawnEntry[] _enemies;
 
-    private float _elapsedTime;
+    private WaveConfig           _waveConfig;
+    private IPlayerHealthService _playerHealth;
+    private EnemyProjectilePool  _projectilePool;
+    private float                _totalWeight;
+    private float                _elapsedTime;
 
     [Inject]
-    public void Construct(EnemyPool pool, WaveConfig waveConfig, EnemyConfig enemyConfig)
+    public void Construct(WaveConfig waveConfig, IPlayerHealthService playerHealth, EnemyProjectilePool projectilePool)
     {
-        _pool        = pool;
-        _waveConfig  = waveConfig;
-        _enemyConfig = enemyConfig;
+        _waveConfig     = waveConfig;
+        _playerHealth   = playerHealth;
+        _projectilePool = projectilePool;
+
+        foreach (var e in _enemies)
+            _totalWeight += e.Weight;
     }
 
     private void Update() => _elapsedTime += Time.deltaTime;
@@ -41,18 +57,34 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            var enemy = _pool.Get();
+            var entry = PickWeightedEntry();
+            if (entry.Pool == null || entry.Config == null) continue;
+            var enemy = entry.Pool.Get();
             enemy.transform.position = GetSpawnPosition();
-            enemy.Initialize(_enemyConfig, _playerTarget, _pool);
+            enemy.Initialize(entry.Config, _playerTarget, entry.Pool, _playerHealth, _projectilePool);
         }
+    }
+
+    private EnemySpawnEntry PickWeightedEntry()
+    {
+        float r          = UnityEngine.Random.Range(0f, _totalWeight);
+        float cumulative = 0f;
+
+        foreach (var e in _enemies)
+        {
+            cumulative += e.Weight;
+            if (r <= cumulative) return e;
+        }
+
+        return _enemies[^1];
     }
 
     private Vector3 GetSpawnPosition()
     {
-        int   side     = Random.Range(0, 4);
+        int   side     = UnityEngine.Random.Range(0, 4);
         float half     = _waveConfig.arenaHalfSize;
         float offset   = _waveConfig.spawnEdgeOffset;
-        float variance = Random.Range(-_waveConfig.spawnEdgeVariance, _waveConfig.spawnEdgeVariance);
+        float variance = UnityEngine.Random.Range(-_waveConfig.spawnEdgeVariance, _waveConfig.spawnEdgeVariance);
 
         return side switch
         {

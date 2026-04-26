@@ -538,6 +538,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322387530}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &325379932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 325379933}
+  - component: {fileID: 325379934}
+  m_Layer: 0
+  m_Name: EnemyPool_Tank
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &325379933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325379932}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1949770605}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &325379934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325379932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df42c6ee978e56498b058a96dc4f949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
+  _prefab: {fileID: 5396815588317979069, guid: a201c826686f27246bb53790959ef06a, type: 3}
+  _initialSize: 10
 --- !u!1 &424675703
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,6 +825,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &504591698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 504591699}
+  m_Layer: 0
+  m_Name: EnemyPool_Tank
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &504591699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504591698}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1949770605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &523998000
 Material:
@@ -1203,7 +1280,7 @@ GameObject:
   - component: {fileID: 847986465}
   - component: {fileID: 847986464}
   m_Layer: 0
-  m_Name: EnemyPoolRoot
+  m_Name: EnemyPool_Basic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1221,7 +1298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df42c6ee978e56498b058a96dc4f949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
-  _prefab: {fileID: 7804278426019215502, guid: 90e9edf502fbc5944958107d49f070b7, type: 3}
+  _prefab: {fileID: 2067102312069983134, guid: 06100ac7cdff75c4188b521b92794bef, type: 3}
   _initialSize: 20
 --- !u!4 &847986465
 Transform:
@@ -1230,6 +1307,52 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847986463}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1949770605}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &895695529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 895695531}
+  - component: {fileID: 895695530}
+  m_Layer: 0
+  m_Name: EnemyProjectilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &895695530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895695529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d650084541dc9bf41b5e67b29ed6c7c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyProjectilePool
+  _prefab: {fileID: 5724114205023888211, guid: 69fede49f2b76b7489392f6f8c39c4b8, type: 3}
+  _initialSize: 15
+--- !u!4 &895695531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895695529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1363,10 +1486,9 @@ MonoBehaviour:
   _movement: {fileID: 1292198473}
   _hudView: {fileID: 8885768154888690403}
   _playerConfig: {fileID: 11400000, guid: b653ca7ac94851045a25e1e962c6e7ba, type: 2}
-  _enemyPool: {fileID: 847986464}
   _enemySpawner: {fileID: 1357735689}
   _waveConfig: {fileID: 11400000, guid: 66af165117e96b844aa4834b345613cb, type: 2}
-  _enemyConfig: {fileID: 11400000, guid: 541a2d8ee6ce73b479f227408ed7fa03, type: 2}
+  _enemyProjectilePool: {fileID: 895695530}
   _staffFloating: {fileID: 1618307487}
   _staffCombat: {fileID: 1618307486}
   _projectilePool: {fileID: 1142496797}
@@ -2015,6 +2137,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _playerTarget: {fileID: 1292198472}
+  _enemies:
+  - Pool: {fileID: 847986464}
+    Config: {fileID: 11400000, guid: be4c1e6ad3a2bc343bbe47b6b4f86dc5, type: 2}
+    Weight: 0.35
+  - Pool: {fileID: 325379934}
+    Config: {fileID: 11400000, guid: b9f1a8fba4b3aa14a9ca4fa3437103b2, type: 2}
+    Weight: 0.15
+  - Pool: {fileID: 1577419701}
+    Config: {fileID: 11400000, guid: 0286375f1b4232d49985a74001e6b1de, type: 2}
+    Weight: 0.25
+  - Pool: {fileID: 1914657069}
+    Config: {fileID: 11400000, guid: 77d78d393bda0ca4da1dda0fffc7d240, type: 2}
+    Weight: 0.15
+  - Pool: {fileID: 2016324234}
+    Config: {fileID: 11400000, guid: ba614a025ab52304a85a879484455600, type: 2}
+    Weight: 0.1
 --- !u!4 &1357735690
 Transform:
   m_ObjectHideFlags: 0
@@ -2236,6 +2374,52 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &1577419699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1577419700}
+  - component: {fileID: 1577419701}
+  m_Layer: 0
+  m_Name: EnemyPool_Speed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1577419700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577419699}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1949770605}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1577419701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577419699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df42c6ee978e56498b058a96dc4f949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
+  _prefab: {fileID: 5987918800476189252, guid: b3f4bc1430161fe4a85eb29cd77292d9, type: 3}
+  _initialSize: 15
 --- !u!21 &1582329998
 Material:
   serializedVersion: 8
@@ -2732,6 +2916,135 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00267603089bce54d9eaa19172dcb1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HpBarView
+--- !u!1 &1914657067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1914657068}
+  - component: {fileID: 1914657069}
+  m_Layer: 0
+  m_Name: EnemyPool_Shooter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1914657068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914657067}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1949770605}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1914657069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914657067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df42c6ee978e56498b058a96dc4f949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
+  _prefab: {fileID: 2178304970546858207, guid: 3bc8d857ffa31824eafbd254725c81c0, type: 3}
+  _initialSize: 10
+--- !u!1 &1949770604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1949770605}
+  m_Layer: 0
+  m_Name: EnemyPools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1949770605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949770604}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 847986465}
+  - {fileID: 504591699}
+  - {fileID: 325379933}
+  - {fileID: 1577419700}
+  - {fileID: 1914657068}
+  - {fileID: 2016324233}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2016324232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2016324233}
+  - component: {fileID: 2016324234}
+  m_Layer: 0
+  m_Name: EnemyPool_Bomber
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2016324233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016324232}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1949770605}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2016324234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016324232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df42c6ee978e56498b058a96dc4f949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
+  _prefab: {fileID: 9181127377766600467, guid: eb7b99e1acfeb68418847bb9b6303b5b, type: 3}
+  _initialSize: 10
 --- !u!114 &2052696262 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4090514978855193530, guid: 59e29531c0d580147a2d8564acedaeba, type: 3}
@@ -2889,6 +3202,7 @@ SceneRoots:
   - {fileID: 1292198472}
   - {fileID: 8885768154888690402}
   - {fileID: 1413937834}
-  - {fileID: 847986465}
   - {fileID: 1357735690}
   - {fileID: 1142496798}
+  - {fileID: 1949770605}
+  - {fileID: 895695531}

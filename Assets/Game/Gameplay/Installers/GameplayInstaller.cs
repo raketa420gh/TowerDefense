@@ -14,16 +14,13 @@ public class GameplayInstaller : MonoInstaller
     private PlayerConfig _playerConfig;
 
     [SerializeField]
-    private EnemyPool _enemyPool;
-
-    [SerializeField]
     private EnemySpawner _enemySpawner;
 
     [SerializeField]
     private WaveConfig _waveConfig;
 
     [SerializeField]
-    private EnemyConfig _enemyConfig;
+    private EnemyProjectilePool _enemyProjectilePool;
 
     [SerializeField]
     private StaffFloatingBehaviour _staffFloating;
@@ -67,8 +64,8 @@ public class GameplayInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle().NonLazy();
 
         Container.BindInstance(_waveConfig);
-        Container.BindInstance(_enemyConfig);
-        Container.BindInstance(_enemyPool).AsSingle();
+        Container.BindInstance(_enemyProjectilePool).AsSingle();
+        Container.QueueForInject(_enemyProjectilePool);
         Container.QueueForInject(_enemySpawner);
 
         Container.BindInstance(_staffCombatConfig);
