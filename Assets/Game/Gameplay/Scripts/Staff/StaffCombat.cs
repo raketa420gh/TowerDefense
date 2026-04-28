@@ -10,8 +10,12 @@ public class StaffCombat : MonoBehaviour
     private StaffCombatConfig  _config;
     private ProjectilePool     _projectilePool;
     private PlayerStatsService _stats;
+    private Transform          _player;
 
     private float _fireTimer;
+
+    private void Awake()
+        => _player = transform.parent;
 
     [Inject]
     public void Construct(StaffCombatConfig config, ProjectilePool projectilePool, PlayerStatsService stats)
@@ -41,13 +45,14 @@ public class StaffCombat : MonoBehaviour
 
     private Transform FindClosestEnemy()
     {
-        var hits     = Physics.OverlapSphere(transform.position, _config.detectionRadius, LayerMask.GetMask("Enemy"));
+        var center  = _player.position;
+        var hits    = Physics.OverlapSphere(center, _config.detectionRadius, LayerMask.GetMask("Enemy"));
         Transform closest = null;
         var       minDist = float.MaxValue;
 
         foreach (var hit in hits)
         {
-            var d = (hit.transform.position - transform.position).sqrMagnitude;
+            var d = (hit.transform.position - center).sqrMagnitude;
             if (d < minDist) { minDist = d; closest = hit.transform; }
         }
         return closest;
@@ -55,8 +60,11 @@ public class StaffCombat : MonoBehaviour
 
     private void Shoot(Transform target)
     {
-        var spawnPos = _muzzlePoint != null ? _muzzlePoint.position : transform.position;
-        var dir      = (target.position - spawnPos).normalized;
+        var muzzle    = _muzzlePoint != null ? _muzzlePoint.position : transform.position;
+        var shootY    = _player.position.y + _config.projectileHeight;
+        var spawnPos  = new Vector3(muzzle.x, shootY, muzzle.z);
+        var targetPos = new Vector3(target.position.x, shootY, target.position.z);
+        var dir       = (targetPos - spawnPos).normalized;
         LaunchProjectile(spawnPos, dir);
         if (UnityEngine.Random.value < _stats.GetBonus(StatType.DoubleShot))
             LaunchProjectile(spawnPos, dir);
@@ -72,7 +80,8 @@ public class StaffCombat : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         if (_config == null) return;
+        var center = transform.parent != null ? transform.parent.position : transform.position;
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, _config.detectionRadius);
+        Gizmos.DrawWireSphere(center, _config.detectionRadius);
     }
 }

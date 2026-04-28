@@ -12,12 +12,12 @@ public class StaffFloatingBehaviour : MonoBehaviour
     {
         _config = config;
         _parent = transform.parent;
-        transform.position = _parent.position + _config.staffOffset;
+        transform.position = _parent.position + Offset;
     }
 
     private void Update()
     {
-        var worldTarget = _parent.position + _config.staffOffset;
+        var worldTarget = _parent.position + Offset;
         worldTarget.y += Mathf.Sin(Time.time * _config.bobFrequency * Mathf.PI * 2f) * _config.bobAmplitude;
 
         transform.position = Vector3.SmoothDamp(
@@ -25,4 +25,7 @@ public class StaffFloatingBehaviour : MonoBehaviour
 
         transform.rotation = Quaternion.identity;
     }
+
+    private Vector3 Offset
+        => new(_config.distanceFromPlayer, _config.heightAbovePlayer, 0f);
 }
