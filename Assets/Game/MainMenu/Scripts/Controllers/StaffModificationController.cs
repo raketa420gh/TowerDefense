@@ -28,6 +28,7 @@ namespace MagicStaff.MainMenu
             _modView.OnSlotClicked     += OpenPicker;
             _modView.OnClosed          += () => _modView.Hide();
             _pickerView.OnPartSelected += SelectPart;
+            _pickerView.OnClosed       += ClosePicker;
 
             _modView.RenderLoadout(_loadoutService.ActiveLoadout);
         }
@@ -36,6 +37,7 @@ namespace MagicStaff.MainMenu
         {
             _modView.OnSlotClicked     -= OpenPicker;
             _pickerView.OnPartSelected -= SelectPart;
+            _pickerView.OnClosed       -= ClosePicker;
         }
 
         void OpenPicker(StaffSlot slot)
@@ -44,6 +46,8 @@ namespace MagicStaff.MainMenu
             _pickerView.Render(LoadPartsForSlot(slot));
             _pickerView.Show();
         }
+
+        void ClosePicker() => _pickerView.Hide();
 
         void SelectPart(StaffPartConfig part)
         {

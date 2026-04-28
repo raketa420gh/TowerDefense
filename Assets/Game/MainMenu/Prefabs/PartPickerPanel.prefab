@@ -59,7 +59,7 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -881,6 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3bbcc33bf6141418f4e5d6cc3687ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicStaff.MainMenu.PartPickerView
+  _closeButton: {fileID: 3271568870924610934}
   _listRoot: {fileID: 8294482086196811453}
   _itemPrefab: {fileID: 6602512775904088308, guid: 82e478474636fc8489c86e61d92744bd, type: 3}
 --- !u!1 &7929036103177633077
@@ -984,7 +985,7 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
