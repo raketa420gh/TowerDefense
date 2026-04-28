@@ -15,5 +15,5 @@ MonoBehaviour:
   _artifact: {fileID: 11400000, guid: 077b086074ee4cc439d1dfac1982887c, type: 2}
   _topCap: {fileID: 11400000, guid: 10a805c7b8c21f04ea59ee9af9df8784, type: 2}
   _grip: {fileID: 11400000, guid: 4642fc89bc71f4747a5cddd795491942, type: 2}
-  _shaft: {fileID: 11400000, guid: f25f3d1fad9996044b33620145006724, type: 2}
+  _shaft: {fileID: 11400000, guid: 97293caac9d6a594e91fe62b15f0422c, type: 2}
   _bottomCap: {fileID: 11400000, guid: 5785480f302dab345ae8b706e34ce25d, type: 2}
