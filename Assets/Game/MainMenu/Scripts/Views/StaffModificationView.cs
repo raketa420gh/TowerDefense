@@ -26,7 +26,12 @@ namespace MagicStaff.MainMenu
         public void RenderLoadout(StaffLoadoutConfig loadout)
         {
             foreach (var slotView in _slots)
-                slotView.Render(loadout.GetPart(slotView.Slot));
+            {
+                if (slotView.Slot == StaffSlot.Shaft)
+                    slotView.Render(loadout.GetPart(StaffSlot.Shaft));
+                else
+                    slotView.RenderLocked();
+            }
         }
     }
 }

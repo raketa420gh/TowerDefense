@@ -13,4 +13,16 @@ public class PlayerStatsService
         _bonuses.TryGetValue(upgrade.stat, out var current);
         _bonuses[upgrade.stat] = current + upgrade.value;
     }
+
+    public void AddBonus(StatType stat, float value)
+    {
+        _bonuses.TryGetValue(stat, out var current);
+        _bonuses[stat] = current + value;
+    }
+
+    public void RemoveBonus(StatType stat, float value)
+    {
+        _bonuses.TryGetValue(stat, out var current);
+        _bonuses[stat] = current - value;
+    }
 }

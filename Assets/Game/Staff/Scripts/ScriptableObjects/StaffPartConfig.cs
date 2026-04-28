@@ -23,11 +23,14 @@ namespace MagicStaff.Staff
         StatModifier[] _modifiers;
         [SerializeField]
         string _description;
+        [SerializeField]
+        private PassiveEffectDefinition[] _passives;
 
         public string partName     => _partName;
         public StaffSlot slot      => _slot;
         public Sprite icon         => _icon;
         public StatModifier[] modifiers => _modifiers;
         public string description  => _description;
+        public PassiveEffectDefinition[] passives => _passives;
     }
 }

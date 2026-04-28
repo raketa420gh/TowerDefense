@@ -55,6 +55,9 @@ public class GameplayInstaller : MonoInstaller
     [SerializeField]
     private PlayerHitReceiver _playerHitReceiver;
 
+    [SerializeField]
+    private ActivePassivesView _activePassivesView;
+
     public override void InstallBindings()
     {
         Container.BindInstance(_playerConfig);
@@ -94,5 +97,9 @@ public class GameplayInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<PlayerHealthService>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<HpHudController>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<DefeatController>().AsSingle().NonLazy();
+
+        Container.BindInstance(_activePassivesView);
+        Container.BindInterfacesAndSelfTo<PassiveEffectService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PassiveHudController>().AsSingle().NonLazy();
     }
 }
